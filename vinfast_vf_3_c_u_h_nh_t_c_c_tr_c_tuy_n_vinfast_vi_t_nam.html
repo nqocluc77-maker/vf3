@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VinFast VF 3 - Cấu Hình & Đặt Cọc Trực Tuyến | VinFast Việt Nam</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        vf: {
+                            blue: '#1464F4',
+                            darkBlue: '#0B46B8',
+                            lightBlue: '#EBF2FF',
+                            navy: '#0F172A',
+                            charcoal: '#1E293B',
+                            gray: '#64748B',
+                            surface: '#F8FAFC'
+                        }
+                    },
+                    boxShadow: {
+                        'vf': '0 10px 30px -5px rgba(20, 100, 244, 0.18)',
+                        'card': '0 4px 24px -2px rgba(15, 23, 42, 0.06)',
+                        'studio': 'inset 0 -40px 80px -20px rgba(15, 23, 42, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & VinFast Studio Polish */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Studio Background Themes */
+        .studio-bg-white {
+            background: radial-gradient(circle at 50% 38%, #ffffff 0%, #f1f5f9 58%, #e2e8f0 100%);
+        }
+        .studio-bg-night {
+            background: radial-gradient(circle at 50% 35%, #1e293b 0%, #0f172a 60%, #020617 100%);
+        }
+        .studio-bg-beach {
+            background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 45%, #fed7aa 70%, #e2e8f0 71%, #cbd5e1 100%);
+        }
+
+        /* Smooth SVG Color Transitions */
+        .car-paint-transition {
+            transition: fill 0.45s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Wheel Spin Animation when Test Drive mode is active */
+        @keyframes spinWheel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .wheel-spinning {
+            animation: spinWheel 1.4s linear infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+
+        /* Headlight Beam Glow */
+        @keyframes pulseBeam {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 0.65; }
+        }
+        .headlight-beam {
+            animation: pulseBeam 2.2s ease-in-out infinite;
+        }
+
+        /* Road Line Animation */
+        @keyframes roadMove {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -120; }
+        }
+        .road-moving {
+            animation: roadMove 0.6s linear infinite;
+        }
+
+        /* Range Slider Custom Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 999px;
+            background: #e2e8f0;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #1464F4;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(20, 100, 244, 0.45);
+            margin-top: -7px;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+        }
+
+        /* Print Receipt Mode */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #receiptModalContent, #receiptModalContent * {
+                visibility: visible;
+            }
+            #receiptModalContent {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-vf-surface text-vf-navy font-sans antialiased selection:bg-vf-blue selection:text-white">
+
+    <!-- TOP PROMO ANNOUNCEMENT BAR -->
+    <div class="bg-vf-navy text-white text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+        <div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-vf-blue text-white uppercase tracking-wider">Chính sách Ưu đãi</span>
+                <span class="font-medium text-slate-200">Miễn 100% lệ phí trước bạ cho xe điện • Giá chỉ từ <strong class="text-white">240.000.000 VNĐ</strong> • Đặt cọc giữ chỗ ưu tiên chỉ <strong class="text-amber-400">15.000.000 VNĐ</strong></span>
+            </div>
+            <div class="hidden md:flex items-center gap-4 text-slate-300 text-xs">
+                <span><i class="fa-solid fa-shield-halved text-vf-blue mr-1"></i>Bảo hành 7 năm / 160.000 km</span>
+                <span>•</span>
+                <a href="tel:1900232389" class="hover:text-white transition"><i class="fa-solid fa-phone-volume text-emerald-400 mr-1"></i>Hotline: <strong>1900 23 23 89</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER & STICKY NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+            <!-- VinFast Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-vf-blue flex items-center justify-center text-white shadow-md group-hover:bg-vf-darkBlue transition">
+                    <!-- VinFast V Emblem Vector -->
+                    <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 16L32 52L54 16H45.5L32 38.5L18.5 16H10Z" fill="white"/>
+                        <path d="M22 16L32 32.5L42 16H36.5L32 23.5L27.5 16H22Z" fill="#93C5FD"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-lg sm:text-xl tracking-widest text-vf-navy">VINFAST</span>
+                        <span class="px-2 py-0.5 text-[11px] font-extrabold bg-vf-lightBlue text-vf-blue rounded-md border border-blue-200">VF 3</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 font-medium hidden sm:inline">Cổng Đặt Cọc & Cấu Hình Trực Tuyến</span>
+                </div>
+            </a>
+
+            <!-- Main Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-slate-600">
+                <a href="#studio-configurator" class="px-3.5 py-2 rounded-xl text-vf-blue bg-vf-lightBlue/70 hover:bg-vf-lightBlue transition">
+                    <i class="fa-solid fa-sliders mr-1.5"></i>Cấu hình & Đặt cọc
+                </a>
+                <a href="#cost-estimator" class="px-3.5 py-2 rounded-xl hover:text-vf-blue hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-calculator mr-1.5"></i>Dự toán lăn bánh & Trả góp
+                </a>
+                <a href="#specs-section" class="px-3.5 py-2 rounded-xl hover:text-vf-blue hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-microchip mr-1.5"></i>Thông số kỹ thuật
+                </a>
+                <a href="#policy-section" class="px-3.5 py-2 rounded-xl hover:text-vf-blue hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-gift mr-1.5"></i>Ưu đãi & Chính sách
+                </a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2.5">
+                <button onclick="openOrderLookupModal()" class="inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl border border-slate-300 bg-white hover:border-vf-blue hover:text-vf-blue text-xs sm:text-sm font-semibold text-slate-700 transition shadow-sm">
+                    <i class="fa-solid fa-magnifying-glass text-vf-blue"></i>
+                    <span>Tra cứu đơn cọc</span>
+                </button>
+                <button onclick="scrollToStep(3)" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-vf-blue hover:bg-vf-darkBlue text-white text-xs sm:text-sm font-bold shadow-vf transition">
+                    <span>Đặt cọc ngay</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SPLIT-SCREEN STUDIO & CONFIGURATOR SECTION -->
+    <main id="studio-configurator" class="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+            <!-- LEFT COLUMN: STICKY INTERACTIVE VF 3 STUDIO (7 COLS ON DESKTOP) -->
+            <div class="lg:col-span-7 lg:sticky lg:top-24 space-y-4">
+                <!-- Studio Container Card -->
+                <div id="studioStage" class="relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-card studio-bg-white transition-all duration-500">
+
+                    <!-- Top Overlay Bar inside Studio: Model Title & Live Color Badge -->
+                    <div class="relative z-10 p-4 sm:p-6 flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur border border-slate-200 shadow-sm text-xs font-bold text-vf-blue mb-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                <span>MINI eSUV ĐÔ THỊ • 2 CỬA 5 CHỖ NGỒI</span>
+                            </div>
+                            <h1 id="studioHeaderTitle" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-vf-navy transition-colors">
+                                VinFast VF 3
+                            </h1>
+                            <p id="studioColorSubtitle" class="text-xs sm:text-sm font-medium text-slate-600 mt-0.5">
+                                Màu ngoại thất: <strong id="liveColorName" class="text-vf-navy">Vàng Nóc Trắng (Summer Yellow)</strong> • <span id="liveColorTypeBadge" class="text-vf-blue font-semibold">Màu Nâng Cao (2-Tone)</span>
+                            </p>
+                        </div>
+
+                        <!-- Interactive Studio Environment & Effect Controls -->
+                        <div class="flex flex-wrap items-center gap-2 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <!-- Headlight Toggle -->
+                            <button id="btnToggleLights" onclick="toggleHeadlights()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-white shadow-sm transition" title="Bật/Tắt đèn pha LED">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <span>Đèn LED: BẬT</span>
+                            </button>
+                            <!-- Motion / Wheel Spin Toggle -->
+                            <button id="btnToggleMotion" onclick="toggleDriveMotion()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" title="Hiệu ứng lăn bánh">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span>Lăn bánh</span>
+                            </button>
+                            <!-- Studio Backdrop Switcher -->
+                            <div class="flex items-center border-l border-slate-200 pl-2 gap-1">
+                                <button onclick="setStudioBackdrop('white')" id="bgBtn-white" class="w-7 h-7 rounded-lg bg-slate-100 border-2 border-vf-blue flex items-center justify-center text-slate-700 text-xs" title="Studio Trắng">
+                                    <i class="fa-solid fa-sun"></i>
+                                </button>
+                                <button onclick="setStudioBackdrop('night')" id="bgBtn-night" class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-400 flex items-center justify-center text-amber-300 text-xs" title="Đô thị ban đêm">
+                                    <i class="fa-solid fa-moon"></i>
+                                </button>
+                                <button onclick="setStudioBackdrop('beach')" id="bgBtn-beach" class="w-7 h-7 rounded-lg bg-sky-200 border border-sky-400 flex items-center justify-center text-sky-800 text-xs" title="Cung đường biển">
+                                    <i class="fa-solid fa-umbrella-beach"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER CAR GRAPHIC STAGE (SVG HIGH-DETAIL VF 3 RENDERER) -->
+                    <div class="relative w-full h-[290px] sm:h-[380px] md:h-[410px] flex items-center justify-center px-2 sm:px-6 select-none overflow-hidden">
+                        <!-- Ambient Studio Floor Reflection -->
+                        <div class="absolute bottom-6 w-4/5 h-12 rounded-[100%] bg-slate-900/15 blur-xl pointer-events-none"></div>
+
+                        <!-- VIEW 1: FRONT 3/4 HERO VIEW (DEFAULT) -->
+                        <svg id="carView-front34" class="w-full max-w-[720px] h-auto drop-shadow-2xl transition-all duration-500" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#1E293B"/>
+                                    <stop offset="50%" stop-color="#334155"/>
+                                    <stop offset="100%" stop-color="#0F172A"/>
+                                </linearGradient>
+                                <linearGradient id="chromeGrad" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#CBD5E1"/>
+                                    <stop offset="50%" stop-color="#FFFFFF"/>
+                                    <stop offset="100%" stop-color="#94A3B8"/>
+                                </linearGradient>
+                                <linearGradient id="bodyShade" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22"/>
+                                    <stop offset="55%" stop-color="#000000" stop-opacity="0"/>
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.24"/>
+                                </linearGradient>
+                                <radialGradient id="headlightGlow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FEF08A" stop-opacity="1"/>
+                                    <stop offset="45%" stop-color="#38BDF8" stop-opacity="0.55"/>
+                                    <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+
+                            <!-- Ground Shadow & Animated Road Lines -->
+                            <ellipse cx="410" cy="382" rx="310" ry="26" fill="#0F172A" fill-opacity="0.28"/>
+                            <line id="roadLineFront" x1="60" y1="402" x2="750" y2="402" stroke="#94A3B8" stroke-width="3" stroke-dasharray="32 28" stroke-opacity="0.45"/>
+
+                            <!-- Rear Left Wheel (Far Side Front Left) -->
+                            <g transform="translate(132, 292)">
+                                <circle cx="48" cy="48" r="46" fill="#0F172A"/>
+                                <circle cx="48" cy="48" r="30" fill="#334155"/>
+                            </g>
+
+                            <!-- FLOATING ROOF & A/B/C PILLARS (2-TONE ROOF ELEMENT) -->
+                            <g id="vf3-roof-front34">
+                                <!-- Roof Rack Rails -->
+                                <path d="M315 92 L585 88 L595 98 L305 100 Z" fill="#1E293B"/>
+                                <!-- Main Boxy Roof Cap (Dynamic Roof Color) -->
+                                <path class="vf3-roof-paint car-paint-transition" d="M272 110 C295 93, 350 90, 445 90 L618 92 C638 93, 650 102, 656 116 L674 188 L236 188 L264 118 C267 113, 269 111, 272 110 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                                <!-- Black Pillar Frame -->
+                                <path d="M248 188 L278 118 L648 118 L668 188 Z" fill="#0F172A"/>
+                                <!-- Front Windshield Glass -->
+                                <path d="M254 184 L282 122 L430 120 L414 184 Z" fill="url(#glassGrad)" stroke="#475569" stroke-width="1.5"/>
+                                <!-- Windshield Specular Highlight -->
+                                <path d="M275 178 L298 126 L335 126 L310 178 Z" fill="#FFFFFF" fill-opacity="0.14"/>
+                                <!-- Side Front Door Window -->
+                                <path d="M432 184 L444 122 L556 122 L556 184 Z" fill="url(#glassGrad)"/>
+                                <!-- Side Rear Quarter Boxy Window (Signature VF 3 Kink) -->
+                                <path d="M570 184 L570 123 L640 124 L654 172 L636 184 Z" fill="url(#glassGrad)"/>
+                                <!-- C-Pillar Geometric Fin -->
+                                <path class="vf3-roof-paint car-paint-transition" d="M640 116 L658 116 L675 186 L650 186 Z" fill="#FFFFFF"/>
+                            </g>
+
+                            <!-- MAIN BOXY SUV BODY SHELL (DYNAMIC BODY PAINT) -->
+                            <g id="vf3-body-front34">
+                                <!-- Main Body Base Color -->
+                                <path class="vf3-body-paint car-paint-transition" d="M122 216 C122 200, 136 192, 162 188 L242 184 L675 184 C692 185, 702 196, 704 214 L708 320 C708 332, 698 342, 682 344 L145 344 C128 342, 118 332, 118 314 Z" fill="#F5B700"/>
+                                <!-- 3D Metallic Lighting Overlay on Body -->
+                                <path d="M122 216 C122 200, 136 192, 162 188 L242 184 L675 184 C692 185, 702 196, 704 214 L708 320 C708 332, 698 342, 682 344 L145 344 C128 342, 118 332, 118 314 Z" fill="url(#bodyShade)"/>
+                                <!-- Upper Hood Bonnet Sculpting -->
+                                <path class="vf3-body-paint car-paint-transition" d="M135 204 L242 184 L418 184 L355 212 L135 212 Z" fill="#F5B700" stroke="#000000" stroke-opacity="0.15" stroke-width="1.5"/>
+                                <!-- Door Panel Seam & Character Crease (2-Door SUV) -->
+                                <path d="M428 190 L424 318 L565 318 L565 190" stroke="#0F172A" stroke-opacity="0.28" stroke-width="2" fill="none"/>
+                                <line x1="385" y1="242" x2="692" y2="238" stroke="#0F172A" stroke-opacity="0.2" stroke-width="3"/>
+                                <!-- Flush Door Handle -->
+                                <rect x="526" y="226" width="28" height="8" rx="4" fill="#1E293B"/>
+                            </g>
+
+                            <!-- FRONT FASCIA: MASK, V-LOGO CHROME WING & HEADLIGHTS -->
+                            <g id="vf3-front-fascia">
+                                <!-- Matte Black Front Grille Mask -->
+                                <rect x="122" y="212" width="228" height="54" rx="12" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+
+                                <!-- Left Headlight Unit -->
+                                <g>
+                                    <rect x="130" y="220" width="46" height="34" rx="6" fill="#1E293B" stroke="#94A3B8" stroke-width="1.5"/>
+                                    <rect class="headlight-bulb" x="136" y="226" width="34" height="22" rx="4" fill="#FEF9C3"/>
+                                    <path class="headlight-bulb" d="M132 250 L174 250" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                                </g>
+
+                                <!-- Right Headlight Unit (Front Perspective) -->
+                                <g>
+                                    <rect x="290" y="220" width="52" height="34" rx="6" fill="#1E293B" stroke="#94A3B8" stroke-width="1.5"/>
+                                    <rect class="headlight-bulb" x="296" y="226" width="40" height="22" rx="4" fill="#FEF9C3"/>
+                                    <path class="headlight-bulb" d="M292 250 L340 250" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                                </g>
+
+                                <!-- Signature VinFast Chrome V-Wing Bar -->
+                                <path d="M178 232 L222 232 L234 252 L246 232 L288 232" stroke="url(#chromeGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <path d="M225 224 L234 240 L243 224" stroke="url(#chromeGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                                <!-- Rugged Front Off-road Bumper & Skid Plate -->
+                                <path d="M114 274 C114 266, 122 262, 134 262 L352 262 C365 262, 374 270, 376 282 L376 342 L114 342 Z" fill="#1E293B"/>
+                                <!-- Silver Skid Plate Insert & License Plate -->
+                                <path d="M148 302 L318 302 L330 342 L138 342 Z" fill="#475569"/>
+                                <rect x="186" y="276" width="96" height="24" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+                                <text x="234" y="293" text-anchor="middle" fill="#0F172A" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="13">VF 3</text>
+                            </g>
+
+                            <!-- RUGGED BLACK WHEEL ARCHES & SIDE SKIRTS -->
+                            <g>
+                                <!-- Front Wheel Arch Cladding -->
+                                <path d="M332 344 C332 266, 365 246, 412 246 C460 246, 492 268, 492 344 L472 344 L472 332 L352 332 L352 344 Z" fill="#1E293B"/>
+                                <!-- Side Skirt Cladding -->
+                                <rect x="480" y="316" width="112" height="28" fill="#1E293B"/>
+                                <!-- Rear Wheel Arch Cladding -->
+                                <path d="M575 344 C575 270, 604 250, 646 250 C688 250, 712 272, 712 344 Z" fill="#1E293B"/>
+                            </g>
+
+                            <!-- Side Mirror (Two-Tone Black/Roof Accent) -->
+                            <g>
+                                <path d="M416 174 L446 168 C454 168, 460 174, 460 182 L458 194 L416 192 Z" fill="#0F172A" stroke="#475569" stroke-width="1.5"/>
+                                <rect x="424" y="180" width="24" height="4" rx="2" fill="#F59E0B"/>
+                            </g>
+
+                            <!-- FRONT RIGHT 16-INCH WHEEL -->
+                            <g transform="translate(356, 274)">
+                                <g class="car-wheel wheel-spinning">
+                                    <!-- Rugged Tire -->
+                                    <circle cx="56" cy="56" r="54" fill="#0F172A" stroke="#1E293B" stroke-width="3"/>
+                                    <circle cx="56" cy="56" r="44" fill="#1E293B"/>
+                                    <!-- 16-inch 5-Spoke Alloy Rim -->
+                                    <circle cx="56" cy="56" r="35" fill="#CBD5E1" stroke="#64748B" stroke-width="2"/>
+                                    <circle cx="56" cy="56" r="12" fill="#1E293B"/>
+                                    <!-- 5 Spokes -->
+                                    <path d="M56 21 L56 44 M89 45 L67 52 M76 84 L63 66 M36 84 L49 66 M23 45 L45 52" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+                                    <!-- Center VinFast Cap -->
+                                    <circle cx="56" cy="56" r="6" fill="#1464F4"/>
+                                </g>
+                            </g>
+
+                            <!-- REAR RIGHT 16-INCH WHEEL -->
+                            <g transform="translate(592, 276)">
+                                <g class="car-wheel wheel-spinning">
+                                    <circle cx="54" cy="54" r="52" fill="#0F172A" stroke="#1E293B" stroke-width="3"/>
+                                    <circle cx="54" cy="54" r="42" fill="#1E293B"/>
+                                    <circle cx="54" cy="54" r="33" fill="#CBD5E1" stroke="#64748B" stroke-width="2"/>
+                                    <circle cx="54" cy="54" r="11" fill="#1E293B"/>
+                                    <path d="M54 21 L54 43 M85 43 L65 50 M73 81 L61 64 M35 81 L47 64 M23 43 L43 50" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+                                    <circle cx="54" cy="54" r="5.5" fill="#1464F4"/>
+                                </g>
+                            </g>
+
+                            <!-- HEADLIGHT GLOW BEAMS (TOGGLED VIA BUTTON) -->
+                            <g id="headlightBeamsFront" class="headlight-beam">
+                                <circle cx="153" cy="237" r="36" fill="url(#headlightGlow)"/>
+                                <circle cx="316" cy="237" r="40" fill="url(#headlightGlow)"/>
+                                <polygon points="140,242 15,285 15,215" fill="url(#headlightGlow)" opacity="0.55"/>
+                                <polygon points="305,242 95,305 95,220" fill="url(#headlightGlow)" opacity="0.55"/>
+                            </g>
+                        </svg>
+
+                        <!-- VIEW 2: SIDE PROFILE VIEW (HIDDEN BY DEFAULT) -->
+                        <svg id="carView-side" class="hidden w-full max-w-[720px] h-auto drop-shadow-2xl transition-all duration-500" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="382" rx="310" ry="22" fill="#0F172A" fill-opacity="0.28"/>
+                            <!-- Roof Rack -->
+                            <rect x="295" y="88" width="335" height="10" rx="4" fill="#1E293B"/>
+                            <!-- 2-Tone Roof Cap -->
+                            <path class="vf3-roof-paint car-paint-transition" d="M250 112 C265 96, 290 94, 330 94 L635 94 C655 94, 668 102, 674 118 L692 192 L212 192 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                            <!-- Side Windows & Pillars -->
+                            <path d="M226 190 L262 118 L480 118 L480 190 Z" fill="url(#glassGrad)"/>
+                            <path d="M498 190 L498 118 L636 118 L652 174 L632 190 Z" fill="url(#glassGrad)"/>
+                            <!-- C-Pillar Accent -->
+                            <path class="vf3-roof-paint car-paint-transition" d="M636 112 L668 112 L688 190 L654 190 Z" fill="#FFFFFF"/>
+                            <!-- Main Side Body -->
+                            <path class="vf3-body-paint car-paint-transition" d="M110 226 C110 206, 126 196, 152 192 L215 190 L692 190 C705 192, 712 204, 714 222 L714 332 L110 332 Z" fill="#F5B700"/>
+                            <path d="M110 226 C110 206, 126 196, 152 192 L215 190 L692 190 C705 192, 712 204, 714 222 L714 332 L110 332 Z" fill="url(#bodyShade)"/>
+                            <!-- Door Seam & Handle -->
+                            <rect x="255" y="196" width="225" height="118" rx="4" stroke="#0F172A" stroke-opacity="0.28" stroke-width="2" fill="none"/>
+                            <rect x="438" y="226" width="32" height="9" rx="4.5" fill="#1E293B"/>
+                            <!-- Side Geometric Feature Line -->
+                            <path d="M130 245 L698 242" stroke="#0F172A" stroke-opacity="0.2" stroke-width="3.5"/>
+                            <!-- Charging Port Flap on Rear Quarter -->
+                            <rect x="615" y="212" width="28" height="22" rx="4" stroke="#0F172A" stroke-opacity="0.35" stroke-width="1.5" fill="none"/>
+                            <!-- Rugged Black Cladding & Bumpers -->
+                            <path d="M98 282 L152 282 L152 342 L98 342 Z" fill="#1E293B"/>
+                            <path d="M675 282 L724 282 L724 342 L675 342 Z" fill="#1E293B"/>
+                            <rect x="250" y="314" width="310" height="28" fill="#1E293B"/>
+                            <!-- Wheel Arches -->
+                            <path d="M135 342 C135 262, 170 242, 218 242 C266 242, 300 262, 300 342 Z" fill="#1E293B"/>
+                            <path d="M535 342 C535 262, 570 242, 618 242 C666 242, 700 262, 700 342 Z" fill="#1E293B"/>
+                            <!-- Front & Rear Lights -->
+                            <rect class="headlight-bulb" x="110" y="218" width="24" height="32" rx="4" fill="#FEF08A"/>
+                            <rect x="698" y="214" width="16" height="44" rx="4" fill="#EF4444"/>
+                            <!-- Front Side Mirror -->
+                            <rect x="248" y="168" width="32" height="22" rx="6" fill="#0F172A"/>
+                            <!-- Front Wheel -->
+                            <g transform="translate(162, 274)">
+                                <g class="car-wheel wheel-spinning">
+                                    <circle cx="56" cy="56" r="54" fill="#0F172A"/>
+                                    <circle cx="56" cy="56" r="36" fill="#CBD5E1"/>
+                                    <path d="M56 20 L56 44 M89 45 L67 52 M76 84 L63 66 M36 84 L49 66 M23 45 L45 52" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+                                    <circle cx="56" cy="56" r="7" fill="#1464F4"/>
+                                </g>
+                            </g>
+                            <!-- Rear Wheel -->
+                            <g transform="translate(562, 274)">
+                                <g class="car-wheel wheel-spinning">
+                                    <circle cx="56" cy="56" r="54" fill="#0F172A"/>
+                                    <circle cx="56" cy="56" r="36" fill="#CBD5E1"/>
+                                    <path d="M56 20 L56 44 M89 45 L67 52 M76 84 L63 66 M36 84 L49 66 M23 45 L45 52" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
+                                    <circle cx="56" cy="56" r="7" fill="#1464F4"/>
+                                </g>
+                            </g>
+                            <!-- Dimension Callout Line -->
+                            <g opacity="0.75">
+                                <line x1="105" y1="415" x2="718" y2="415" stroke="#1464F4" stroke-width="2"/>
+                                <text x="410" y="434" text-anchor="middle" fill="#1464F4" font-size="13" font-weight="700">Dài 3.190 mm • Chiều dài cơ sở 2.075 mm • Gầm cao 191 mm</text>
+                            </g>
+                        </svg>
+
+                        <!-- VIEW 3: REAR 3/4 VIEW (HIDDEN BY DEFAULT) -->
+                        <svg id="carView-rear34" class="hidden w-full max-w-[720px] h-auto drop-shadow-2xl transition-all duration-500" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="400" cy="382" rx="300" ry="25" fill="#0F172A" fill-opacity="0.28"/>
+                            <!-- 2-Tone Roof Rear Perspective -->
+                            <path class="vf3-roof-paint car-paint-transition" d="M168 118 C180 100, 210 92, 260 92 L540 92 C572 94, 594 106, 608 126 L632 190 L146 190 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                            <!-- Rear Tailgate Glass -->
+                            <path d="M448 184 L462 120 L602 122 L620 184 Z" fill="url(#glassGrad)"/>
+                            <!-- Side Windows -->
+                            <path d="M162 184 L184 122 L292 122 L292 184 Z" fill="url(#glassGrad)"/>
+                            <path d="M308 184 L308 122 L416 122 L416 184 Z" fill="url(#glassGrad)"/>
+                            <!-- Main Body Shell Rear 3/4 -->
+                            <path class="vf3-body-paint car-paint-transition" d="M114 218 L146 186 L632 186 C654 190, 668 205, 672 228 L674 334 L114 334 Z" fill="#F5B700"/>
+                            <path d="M114 218 L146 186 L632 186 C654 190, 668 205, 672 228 L674 334 L114 334 Z" fill="url(#bodyShade)"/>
+                            <!-- Vertical Rear LED Tail Lamps -->
+                            <rect x="438" y="198" width="22" height="58" rx="5" fill="#DC2626" stroke="#FCA5A5" stroke-width="1.5"/>
+                            <rect x="646" y="198" width="20" height="58" rx="5" fill="#DC2626" stroke="#FCA5A5" stroke-width="1.5"/>
+                            <!-- Rear Tailgate Chrome V-Wing -->
+                            <path d="M472 224 L536 224 L552 246 L568 224 L634 224" stroke="url(#chromeGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="552" y="272" text-anchor="middle" fill="#0F172A" font-weight="800" font-size="15" letter-spacing="4">VINFAST</text>
+                            <!-- Rugged Rear Off-Road Bumper -->
+                            <path d="M426 284 L682 284 L682 344 L426 344 Z" fill="#1E293B"/>
+                            <rect x="506" y="298" width="94" height="24" rx="4" fill="#FFFFFF"/>
+                            <text x="553" y="315" text-anchor="middle" fill="#0F172A" font-weight="800" font-size="13">VF 3</text>
+                            <!-- Side Wheel Arches & Wheels -->
+                            <path d="M126 344 C126 270, 156 250, 200 250 C244 250, 274 270, 274 344 Z" fill="#1E293B"/>
+                            <path d="M312 344 C312 268, 346 248, 396 248 C446 248, 478 268, 478 344 Z" fill="#1E293B"/>
+                            <g transform="translate(148, 276)">
+                                <g class="car-wheel wheel-spinning">
+                                    <circle cx="52" cy="52" r="50" fill="#0F172A"/>
+                                    <circle cx="52" cy="52" r="33" fill="#CBD5E1"/>
+                                    <circle cx="52" cy="52" r="6" fill="#1464F4"/>
+                                </g>
+                            </g>
+                            <g transform="translate(342, 274)">
+                                <g class="car-wheel wheel-spinning">
+                                    <circle cx="56" cy="56" r="54" fill="#0F172A"/>
+                                    <circle cx="56" cy="56" r="36" fill="#CBD5E1"/>
+                                    <circle cx="56" cy="56" r="7" fill="#1464F4"/>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <!-- VIEW 4: MINIMALIST INTERIOR COCKPIT WITH 10-INCH TOUCHSCREEN -->
+                        <svg id="carView-interior" class="hidden w-full max-w-[720px] h-auto drop-shadow-2xl transition-all duration-500" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Windshield View Frame -->
+                            <rect x="40" y="20" width="720" height="410" rx="28" fill="#0F172A" stroke="#334155" stroke-width="4"/>
+                            <!-- Outside Scenery through Windshield -->
+                            <path d="M60 35 L740 35 L710 185 L90 185 Z" fill="#1E293B"/>
+                            <!-- Hood Hint Visible from Cockpit -->
+                            <path class="vf3-body-paint car-paint-transition" d="M120 185 L260 158 L540 158 L680 185 Z" fill="#F5B700" opacity="0.85"/>
+                            <!-- Minimalist Layered Dashboard (Grey-Black Theme) -->
+                            <path d="M50 185 L750 185 L760 340 L40 340 Z" fill="#1E293B"/>
+                            <path d="M68 205 L732 205 L720 278 L80 278 Z" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+                            <!-- Contrast Stitching Line & Air Vents -->
+                            <line x1="90" y1="238" x2="710" y2="238" stroke="#94A3B8" stroke-width="2" stroke-dasharray="8 6"/>
+                            <rect x="96" y="218" width="68" height="26" rx="6" fill="#0F172A" stroke="#64748B" stroke-width="1.5"/>
+                            <rect x="636" y="218" width="68" height="26" rx="6" fill="#0F172A" stroke="#64748B" stroke-width="1.5"/>
+
+                            <!-- CENTRAL 10-INCH FLOATING INFOTAINMENT SCREEN -->
+                            <g transform="translate(330, 142)">
+                                <rect x="0" y="0" width="230" height="136" rx="14" fill="#020617" stroke="#94A3B8" stroke-width="3"/>
+                                <!-- Screen Live UI -->
+                                <rect x="8" y="8" width="214" height="120" rx="8" fill="#0F172A"/>
+                                <!-- Left Status Panel (Speed & Gear) -->
+                                <rect x="14" y="14" width="76" height="108" rx="6" fill="#1E293B"/>
+                                <text x="52" y="34" text-anchor="middle" fill="#38BDF8" font-size="10" font-weight="700">READY</text>
+                                <text x="52" y="68" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="800">0</text>
+                                <text x="52" y="82" text-anchor="middle" fill="#94A3B8" font-size="9">km/h</text>
+                                <text x="52" y="102" text-anchor="middle" fill="#34D399" font-size="10" font-weight="700">PIN 92% • 210km</text>
+                                <text x="52" y="116" text-anchor="middle" fill="#F8FAFC" font-size="9" font-weight="700">P  R  N  [D]</text>
+                                <!-- Right Infotainment Panel -->
+                                <rect x="96" y="14" width="120" height="64" rx="6" fill="#172554"/>
+                                <text x="156" y="34" text-anchor="middle" fill="#93C5FD" font-size="10" font-weight="700">VINFAST OS • 10"</text>
+                                <text x="156" y="52" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700">VF 3 Smart Cockpit</text>
+                                <text x="156" y="68" text-anchor="middle" fill="#60A5FA" font-size="9">Apple CarPlay / Android Auto</text>
+                                <!-- Climate Bar -->
+                                <rect x="96" y="84" width="120" height="38" rx="6" fill="#1E293B"/>
+                                <text x="156" y="107" text-anchor="middle" fill="#E2E8F0" font-size="11" font-weight="700">❄️ A/C 22.0°C  •  AUTO</text>
+                            </g>
+
+                            <!-- D-CUT MULTI-FUNCTION STEERING WHEEL & GEAR STALK -->
+                            <g transform="translate(115, 145)">
+                                <!-- Electronic Gear Shifter Stalk Behind Wheel -->
+                                <rect x="135" y="62" width="58" height="14" rx="7" transform="rotate(-18 135 62)" fill="#475569" stroke="#CBD5E1"/>
+                                <!-- Steering Wheel Rim -->
+                                <circle cx="95" cy="95" r="82" stroke="#0F172A" stroke-width="18" fill="none"/>
+                                <circle cx="95" cy="95" r="82" stroke="#334155" stroke-width="3" fill="none"/>
+                                <!-- Spokes & Hub -->
+                                <path d="M20 95 L170 95 M95 95 L95 172" stroke="#1E293B" stroke-width="22"/>
+                                <circle cx="95" cy="95" r="34" fill="#0F172A" stroke="#475569" stroke-width="2"/>
+                                <!-- VinFast V Logo on Airbag -->
+                                <path d="M81 84 L95 108 L109 84" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </g>
+
+                            <!-- Two-Tone Front Seats Hint -->
+                            <path d="M75 350 C90 310, 240 310, 260 350 L270 420 L65 420 Z" fill="#334155" stroke="#475569" stroke-width="2"/>
+                            <path d="M525 350 C540 310, 690 310, 710 350 L720 420 L515 420 Z" fill="#334155" stroke="#475569" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+                    <!-- VIEW ANGLE SWITCHER PILLS -->
+                    <div class="relative z-10 px-4 pb-4 flex flex-wrap items-center justify-center gap-2">
+                        <button onclick="switchCarView('front34')" id="viewBtn-front34" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-vf-blue text-white shadow-sm transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>Góc 3/4 Trước</span>
+                        </button>
+                        <button onclick="switchCarView('side')" id="viewBtn-side" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/90 text-slate-700 hover:bg-white border border-slate-200 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                            <span>Góc Ngang Hông</span>
+                        </button>
+                        <button onclick="switchCarView('rear34')" id="viewBtn-rear34" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/90 text-slate-700 hover:bg-white border border-slate-200 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-car-rear"></i>
+                            <span>Góc 3/4 Sau</span>
+                        </button>
+                        <button onclick="switchCarView('interior')" id="viewBtn-interior" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/90 text-slate-700 hover:bg-white border border-slate-200 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            <span>Khoang Nội Thất 10"</span>
+                        </button>
+                    </div>
+
+                    <!-- QUICK SPECS HIGHLIGHT BAR UNDER STUDIO -->
+                    <div class="bg-white/95 backdrop-blur border-t border-slate-200/80 px-4 py-3.5 sm:px-6">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
+                            <div class="pt-2 sm:pt-0 first:pt-0 flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-road"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[11px] uppercase font-semibold text-slate-400">Quãng đường</div>
+                                    <div class="text-sm sm:text-base font-extrabold text-vf-navy">210 km <span class="text-[11px] font-medium text-slate-500">(NEDC)</span></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 sm:pt-0 sm:pl-4 flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[11px] uppercase font-semibold text-slate-400">Tăng tốc 0-50 km/h</div>
+                                    <div class="text-sm sm:text-base font-extrabold text-vf-navy">5,3 giây</div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 sm:pt-0 sm:pl-4 flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-charging-station"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[11px] uppercase font-semibold text-slate-400">Sạc nhanh (10-70%)</div>
+                                    <div class="text-sm sm:text-base font-extrabold text-vf-navy">36 phút</div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 sm:pt-0 sm:pl-4 flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-up-down"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[11px] uppercase font-semibold text-slate-400">Khoảng sáng gầm</div>
+                                    <div class="text-sm sm:text-base font-extrabold text-vf-navy">191 mm <span class="text-[11px] font-medium text-slate-500">(R16)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Summary Floating Strip under Studio on Desktop -->
+                <div class="bg-vf-navy text-white rounded-2xl p-4 sm:p-5 shadow-lg flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-vf-blue/20 border border-vf-blue/40 flex items-center justify-center text-sky-400 text-lg">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-300">Tổng giá xe tạm tính (Đã gồm VAT)</div>
+                            <div class="flex items-baseline gap-2">
+                                <span id="studioLiveTotalPrice" class="text-xl sm:text-2xl font-extrabold text-white">248.000.000 VNĐ</span>
+                                <span id="studioLiveBatteryMode" class="text-xs px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-semibold">Thuê pin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <div class="text-xs text-slate-400">Số tiền đặt cọc giữ chỗ</div>
+                            <div class="text-base sm:text-lg font-extrabold text-amber-400">15.000.000 VNĐ</div>
+                        </div>
+                        <a href="#cost-estimator" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition">
+                            Xem trả góp <i class="fa-solid fa-angle-down ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: 3-STEP CONFIGURATION & DEPOSIT WIZARD (5 COLS ON DESKTOP) -->
+            <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-200/90 shadow-card overflow-hidden">
+
+                <!-- 3-Step Wizard Progress Header -->
+                <div class="bg-slate-50 border-b border-slate-200 p-4 sm:p-5">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="switchStep(1)" id="stepTab-1" class="flex items-center gap-2 p-2.5 rounded-xl bg-vf-blue text-white font-bold text-xs sm:text-sm shadow-sm transition text-left">
+                            <span class="w-6 h-6 rounded-full bg-white text-vf-blue flex items-center justify-center font-extrabold text-xs shrink-0">1</span>
+                            <span class="truncate">Chọn cấu hình</span>
+                        </button>
+                        <button onclick="switchStep(2)" id="stepTab-2" class="flex items-center gap-2 p-2.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-semibold text-xs sm:text-sm border border-slate-200 transition text-left">
+                            <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-extrabold text-xs shrink-0">2</span>
+                            <span class="truncate">Khách hàng</span>
+                        </button>
+                        <button onclick="switchStep(3)" id="stepTab-3" class="flex items-center gap-2 p-2.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-semibold text-xs sm:text-sm border border-slate-200 transition text-left">
+                            <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-extrabold text-xs shrink-0">3</span>
+                            <span class="truncate">Thanh toán</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==================== STEP 1: VEHICLE CONFIGURATION ==================== -->
+                <div id="stepContent-1" class="p-5 sm:p-6 space-y-6">
+                    <!-- Section 1.1: Battery Plan Selection -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h2 class="text-base font-extrabold text-vf-navy flex items-center gap-2">
+                                <span class="w-1.5 h-5 rounded-full bg-vf-blue"></span>
+                                1. Chọn phương án Pin
+                            </h2>
+                            <span class="text-xs font-semibold text-vf-blue bg-vf-lightBlue px-2.5 py-1 rounded-full">Đã gồm VAT</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <!-- Option: Battery Lease (Thuê pin) -->
+                            <div id="cardBattery-lease" onclick="selectBatteryPlan('lease')" class="cursor-pointer rounded-2xl p-4 border-2 border-vf-blue bg-vf-lightBlue/35 transition relative">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-sm font-extrabold text-vf-navy">Thuê pin linh hoạt</span>
+                                    <i id="iconBattery-lease" class="fa-solid fa-circle-check text-vf-blue text-lg"></i>
+                                </div>
+                                <div class="text-lg font-extrabold text-vf-blue">240.000.000 ₫</div>
+                                <p class="text-[11px] text-slate-600 mt-1">Tối ưu chi phí ban đầu. Thay thế/sửa chữa pin miễn phí khi dung lượng dưới 70%.</p>
+                            </div>
+
+                            <!-- Option: Battery Purchase (Mua kèm pin) -->
+                            <div id="cardBattery-buy" onclick="selectBatteryPlan('buy')" class="cursor-pointer rounded-2xl p-4 border-2 border-slate-200 hover:border-slate-300 bg-white transition relative">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-sm font-extrabold text-vf-navy">Mua xe kèm pin</span>
+                                    <i id="iconBattery-buy" class="fa-regular fa-circle text-slate-400 text-lg"></i>
+                                </div>
+                                <div class="text-lg font-extrabold text-vf-navy">322.000.000 ₫</div>
+                                <p class="text-[11px] text-slate-600 mt-1">Sở hữu trọn đời pin LFP 18,64 kWh. Bảo hành pin 8 năm không giới hạn km.</p>
+                            </div>
+                        </div>
+
+                        <!-- Monthly Subscription Packages (Visible when Thuê Pin is selected) -->
+                        <div id="batteryLeaseTiersBox" class="mt-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-700"><i class="fa-solid fa-battery-three-quarters text-vf-blue mr-1.5"></i>Chọn gói cước thuê pin hàng tháng dự kiến:</span>
+                            </div>
+                            <div class="grid grid-cols-1 gap-2">
+                                <label onclick="selectLeaseTier(900000, 'Dưới 1.500 km/tháng')" class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-vf-blue cursor-pointer text-xs transition" id="leaseTier-900000">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="leaseTier" checked class="accent-vf-blue">
+                                        <span class="font-semibold text-vf-navy">Đi dưới 1.500 km / tháng</span>
+                                    </div>
+                                    <span class="font-extrabold text-vf-blue">900.000 ₫/tháng</span>
+                                </label>
+                                <label onclick="selectLeaseTier(1200000, '1.500 - 2.500 km/tháng')" class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer text-xs transition" id="leaseTier-1200000">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="leaseTier" class="accent-vf-blue">
+                                        <span class="font-semibold text-vf-navy">Từ 1.500 đến 2.500 km / tháng</span>
+                                    </div>
+                                    <span class="font-extrabold text-vf-navy">1.200.000 ₫/tháng</span>
+                                </label>
+                                <label onclick="selectLeaseTier(2000000, 'Trên 2.500 km/tháng')" class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer text-xs transition" id="leaseTier-2000000">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="leaseTier" class="accent-vf-blue">
+                                        <span class="font-semibold text-vf-navy">Đi trên 2.500 km / tháng</span>
+                                    </div>
+                                    <span class="font-extrabold text-vf-navy">2.000.000 ₫/tháng</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Section 1.2: Exterior Color Picker (4 Basic + 5 Advanced Two-Tone) -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-base font-extrabold text-vf-navy flex items-center gap-2">
+                                <span class="w-1.5 h-5 rounded-full bg-vf-blue"></span>
+                                2. Chọn màu ngoại thất
+                            </h2>
+                            <span id="selectedColorPriceTag" class="text-xs font-extrabold text-vf-blue">+ 8.000.000 ₫</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">Đang chọn: <strong id="configColorLabel" class="text-vf-navy">Vàng Nóc Trắng (Summer Yellow)</strong></p>
+
+                        <!-- 4 Basic Colors -->
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between text-xs font-bold text-slate-600 mb-2">
+                                <span>MÀU CƠ BẢN (4 MÀU)</span>
+                                <span class="text-emerald-600">Miễn phí (+0 ₫)</span>
+                            </div>
+                            <div id="basicColorsGrid" class="grid grid-cols-4 gap-2.5">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+
+                        <!-- 5 Advanced Colors (2-Tone White Roof) -->
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-bold text-slate-600 mb-2">
+                                <span>MÀU NÂNG CAO PHỐI NÓC TRẮNG (5 MÀU)</span>
+                                <span class="text-vf-blue">+8.000.000 ₫</span>
+                            </div>
+                            <div id="advancedColorsGrid" class="grid grid-cols-5 gap-2.5">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Section 1.3: Interior & Genuine Accessories -->
+                    <div>
+                        <h2 class="text-base font-extrabold text-vf-navy flex items-center gap-2 mb-3">
+                            <span class="w-1.5 h-5 rounded-full bg-vf-blue"></span>
+                            3. Nội thất & Phụ kiện tùy chọn
+                        </h2>
+
+                        <!-- Standard Interior Card -->
+                        <div onclick="switchCarView('interior')" class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between cursor-pointer hover:border-vf-blue transition mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-950 border-2 border-white shadow-md"></div>
+                                <div>
+                                    <div class="text-xs font-extrabold text-vf-navy">Nội thất Xám - Đen Tinh Tế</div>
+                                    <div class="text-[11px] text-slate-500">Màn hình giải trí cảm ứng 10 inch • 5 chỗ ngồi</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Tiêu chuẩn</span>
+                        </div>
+
+                        <!-- Optional Accessories List -->
+                        <div class="space-y-2" id="accessoriesListContainer">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Next Step CTA -->
+                    <div class="pt-2">
+                        <button onclick="switchStep(2)" class="w-full py-3.5 px-6 rounded-2xl bg-vf-blue hover:bg-vf-darkBlue text-white font-extrabold text-sm shadow-vf flex items-center justify-center gap-2 transition">
+                            <span>TIẾP TỤC: THÔNG TIN KHÁCH HÀNG</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==================== STEP 2: CUSTOMER & SHOWROOM INFO ==================== -->
+                <div id="stepContent-2" class="hidden p-5 sm:p-6 space-y-5">
+                    <div>
+                        <h2 class="text-base font-extrabold text-vf-navy flex items-center gap-2 mb-1">
+                            <span class="w-1.5 h-5 rounded-full bg-vf-blue"></span>
+                            Thông tin chủ xe đăng ký đặt cọc
+                        </h2>
+                        <p class="text-xs text-slate-500">Thông tin được sử dụng trên Thỏa thuận đặt cọc điện tử VinFast.</p>
+                    </div>
+
+                    <!-- Customer Type Toggle: Cá nhân / Doanh nghiệp -->
+                    <div class="grid grid-cols-2 gap-2.5 p-1 bg-slate-100 rounded-2xl">
+                        <button type="button" id="custTypeBtn-personal" onclick="setCustomerType('personal')" class="py-2.5 rounded-xl bg-white text-vf-blue font-extrabold text-xs shadow-sm transition">
+                            <i class="fa-solid fa-user mr-1.5"></i>Khách hàng Cá nhân
+                        </button>
+                        <button type="button" id="custTypeBtn-corporate" onclick="setCustomerType('corporate')" class="py-2.5 rounded-xl text-slate-600 font-bold text-xs hover:text-vf-navy transition">
+                            <i class="fa-solid fa-building mr-1.5"></i>Doanh nghiệp
+                        </button>
+                    </div>
+
+                    <!-- Form Inputs -->
+                    <div class="space-y-3.5">
+                        <!-- Company Name (Visible only for Corporate) -->
+                        <div id="corporateFieldsBox" class="hidden space-y-3.5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Tên Doanh nghiệp / Tổ chức <span class="text-red-500">*</span></label>
+                                <input id="inputCompanyName" type="text" placeholder="VD: Công ty Cổ phần Công nghệ Xanh Việt Nam" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue focus:ring-2 focus:ring-vf-blue/15">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label id="labelFullName" class="block text-xs font-bold text-slate-700 mb-1">Họ và tên chủ xe <span class="text-red-500">*</span></label>
+                            <input id="inputFullName" type="text" placeholder="Nhập họ và tên có dấu (VD: Nguyễn Văn Minh)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue focus:ring-2 focus:ring-vf-blue/15">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại <span class="text-red-500">*</span></label>
+                                <input id="inputPhone" type="tel" placeholder="VD: 0905123456" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue focus:ring-2 focus:ring-vf-blue/15">
+                            </div>
+                            <div>
+                                <label id="labelIdentity" class="block text-xs font-bold text-slate-700 mb-1">Số CCCD / CMND <span class="text-red-500">*</span></label>
+                                <input id="inputIdentity" type="text" placeholder="Nhập 12 số CCCD" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue focus:ring-2 focus:ring-vf-blue/15">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Email nhận hợp đồng & biên nhận <span class="text-red-500">*</span></label>
+                            <input id="inputEmail" type="email" placeholder="example@gmail.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue focus:ring-2 focus:ring-vf-blue/15">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Tỉnh / Thành phố <span class="text-red-500">*</span></label>
+                                <select id="selectProvince" onchange="updateShowroomList()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:border-vf-blue">
+                                    <option value="Hà Nội">Hà Nội</option>
+                                    <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                    <option value="Hải Phòng">Hải Phòng</option>
+                                    <option value="Cần Thơ">Cần Thơ</option>
+                                    <option value="Bình Dương">Bình Dương</option>
+                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Showroom nhận xe <span class="text-red-500">*</span></label>
+                                <select id="selectShowroom" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:border-vf-blue">
+                                    <!-- Dynamic via JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Promo / Voucher Input -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Mã giới thiệu / Voucher ưu đãi (Nếu có)</label>
+                            <div class="flex gap-2">
+                                <input id="inputVoucher" type="text" placeholder="Thử nhập: VINFASTVIP hoặc VF3XANH" class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 text-sm uppercase focus:outline-none focus:border-vf-blue">
+                                <button type="button" onclick="applyPromoVoucher()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-vf-blue text-white text-xs font-bold transition">Áp dụng</button>
+                            </div>
+                            <p id="voucherFeedback" class="text-[11px] text-slate-500 mt-1">Gợi ý: Nhập mã <button type="button" onclick="quickFillVoucher('VINFASTVIP')" class="text-vf-blue font-bold underline">VINFASTVIP</button> để nhận ưu đãi phụ kiện 3.000.000 ₫.</p>
+                        </div>
+                    </div>
+
+                    <!-- Validation Message Box -->
+                    <div id="step2ValidationAlert" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation text-red-500"></i>
+                        <span id="step2ValidationText">Vui lòng điền đầy đủ thông tin bắt buộc.</span>
+                    </div>
+
+                    <!-- Step 2 Navigation Buttons -->
+                    <div class="grid grid-cols-3 gap-3 pt-2">
+                        <button type="button" onclick="switchStep(1)" class="col-span-1 py-3 px-4 rounded-2xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-bold text-xs sm:text-sm transition">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Quay lại
+                        </button>
+                        <button type="button" onclick="validateAndGoStep3()" class="col-span-2 py-3.5 px-6 rounded-2xl bg-vf-blue hover:bg-vf-darkBlue text-white font-extrabold text-xs sm:text-sm shadow-vf flex items-center justify-center gap-2 transition">
+                            <span>TIẾP TỤC THANH TOÁN</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==================== STEP 3: DEPOSIT PAYMENT & VIETQR ==================== -->
+                <div id="stepContent-3" class="hidden p-5 sm:p-6 space-y-5">
+                    <!-- Order Configuration Summary Card -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5 text-xs">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <span class="font-extrabold text-vf-navy uppercase tracking-wider">Tóm tắt cấu hình VinFast VF 3</span>
+                            <button onclick="switchStep(1)" class="text-vf-blue font-bold hover:underline"><i class="fa-solid fa-pen mr-1"></i>Đổi cấu hình</button>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Phiên bản & Pin:</span>
+                            <span id="summaryBatteryPlan" class="font-bold text-vf-navy">VF 3 - Thuê pin (240.000.000 ₫)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Màu ngoại thất:</span>
+                            <span id="summaryExteriorColor" class="font-bold text-vf-navy">Vàng Nóc Trắng (+8.000.000 ₫)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Phụ kiện đi kèm:</span>
+                            <span id="summaryAccessories" class="font-bold text-vf-navy">Không chọn (+0 ₫)</span>
+                        </div>
+                        <div id="summaryDiscountRow" class="hidden flex justify-between text-emerald-600">
+                            <span>Voucher ưu đãi:</span>
+                            <span id="summaryDiscountVal" class="font-bold">-3.000.000 ₫</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-slate-200 text-sm">
+                            <span class="font-bold text-slate-700">Tổng giá xe niêm yết:</span>
+                            <span id="summaryFinalCarPrice" class="font-extrabold text-vf-blue">248.000.000 VNĐ</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 rounded-xl bg-amber-50 border border-amber-200 mt-1">
+                            <span class="font-bold text-amber-900">Số tiền đặt cọc cần thanh toán:</span>
+                            <span class="text-base font-extrabold text-amber-600">15.000.000 VNĐ</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods Selection -->
+                    <div>
+                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 mb-2.5">Chọn phương thức thanh toán cọc</h3>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" onclick="selectPaymentMethod('qr')" id="payTab-qr" class="p-2.5 rounded-xl border-2 border-vf-blue bg-vf-lightBlue/40 text-vf-blue font-extrabold text-xs flex flex-col items-center gap-1 transition">
+                                <i class="fa-solid fa-qrcode text-lg"></i>
+                                <span>Chuyển khoản QR</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('napas')" id="payTab-napas" class="p-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold text-xs flex flex-col items-center gap-1 hover:border-slate-300 transition">
+                                <i class="fa-solid fa-building-columns text-lg"></i>
+                                <span>Thẻ ATM / NAPAS</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('card')" id="payTab-card" class="p-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold text-xs flex flex-col items-center gap-1 hover:border-slate-300 transition">
+                                <i class="fa-brands fa-cc-visa text-lg"></i>
+                                <span>Visa / Master</span>
+                            </button>
+                        </div>
+
+                        <!-- Payment Method 1: VietQR Box -->
+                        <div id="payPanel-qr" class="mt-3 p-4 rounded-2xl border border-blue-200 bg-gradient-to-b from-blue-50/60 to-white">
+                            <div class="flex flex-col sm:flex-row items-center gap-4">
+                                <!-- Dynamic Custom SVG VietQR Code -->
+                                <div class="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm shrink-0 text-center">
+                                    <div class="text-[10px] font-extrabold text-vf-blue tracking-wider mb-1">VIETQR • NAPAS 247</div>
+                                    <svg class="w-28 h-28 mx-auto" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="120" height="120" rx="8" fill="white"/>
+                                        <!-- Finder Patterns -->
+                                        <rect x="10" y="10" width="28" height="28" stroke="#0F172A" stroke-width="6"/>
+                                        <rect x="18" y="18" width="12" height="12" fill="#1464F4"/>
+                                        <rect x="82" y="10" width="28" height="28" stroke="#0F172A" stroke-width="6"/>
+                                        <rect x="90" y="18" width="12" height="12" fill="#1464F4"/>
+                                        <rect x="10" y="82" width="28" height="28" stroke="#0F172A" stroke-width="6"/>
+                                        <rect x="18" y="90" width="12" height="12" fill="#1464F4"/>
+                                        <!-- Data Modules -->
+                                        <path d="M48 12h6v6h-6zM60 12h12v6H60zM48 24h12v6H48zM66 24h6v12h-6zM46 44h10v10H46zM68 44h10v6H68zM12 48h18v6H12zM12 60h6v12h-6zM24 60h12v6H24zM84 48h12v6H84zM102 48h8v16h-8zM44 68h12v6H44zM68 62h12v12H68zM86 68h16v6H86zM48 82h6v16h-6zM60 88h16v6H60zM84 82h12v12H84zM102 88h8v20h-8zM48 104h30v6H48z" fill="#0F172A"/>
+                                        <!-- Center VinFast Mini Badge -->
+                                        <rect x="48" y="48" width="24" height="24" rx="5" fill="#1464F4"/>
+                                        <path d="M54 54L60 66L66 54" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <div class="text-[10px] text-slate-400 mt-1">Quét bằng App Ngân hàng</div>
+                                </div>
+
+                                <!-- Bank Transfer Details -->
+                                <div class="flex-1 space-y-2 text-xs w-full">
+                                    <div>
+                                        <span class="text-slate-400 block">Đơn vị thụ hưởng:</span>
+                                        <strong class="text-vf-navy">CÔNG TY TNHH KD TM VÀ DV VINFAST</strong>
+                                    </div>
+                                    <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                                        <div>
+                                            <span class="text-slate-400 block text-[10px]">Ngân hàng TMCP Kỹ Thương (Techcombank)</span>
+                                            <strong class="font-mono text-sm text-vf-blue">1903 6868 9999 88</strong>
+                                        </div>
+                                        <button type="button" onclick="copyTextToClipboard('19036868999988', 'Đã sao chép số tài khoản VinFast')" class="text-vf-blue hover:bg-vf-lightBlue px-2 py-1 rounded font-bold text-[11px]">
+                                            <i class="fa-regular fa-copy"></i> Sao chép
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                                        <div>
+                                            <span class="text-slate-400 block text-[10px]">Nội dung chuyển khoản tự động:</span>
+                                            <strong id="qrOrderCodeDisplay" class="font-mono text-sm text-emerald-700">VF320258899</strong>
+                                        </div>
+                                        <button type="button" onclick="copyOrderCode()" class="text-vf-blue hover:bg-vf-lightBlue px-2 py-1 rounded font-bold text-[11px]">
+                                            <i class="fa-regular fa-copy"></i> Sao chép
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method 2: Domestic ATM / NAPAS -->
+                        <div id="payPanel-napas" class="hidden mt-3 p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-3">
+                            <div class="text-xs font-bold text-slate-700">Chọn ngân hàng thanh toán nội địa (NAPAS):</div>
+                            <div class="grid grid-cols-3 gap-2 text-xs font-extrabold">
+                                <label class="p-2.5 rounded-xl border border-vf-blue bg-white text-center cursor-pointer text-vf-blue">Vietcombank</label>
+                                <label class="p-2.5 rounded-xl border border-slate-200 bg-white text-center cursor-pointer hover:border-vf-blue">Techcombank</label>
+                                <label class="p-2.5 rounded-xl border border-slate-200 bg-white text-center cursor-pointer hover:border-vf-blue">BIDV</label>
+                                <label class="p-2.5 rounded-xl border border-slate-200 bg-white text-center cursor-pointer hover:border-vf-blue">VietinBank</label>
+                                <label class="p-2.5 rounded-xl border border-slate-200 bg-white text-center cursor-pointer hover:border-vf-blue">MB Bank</label>
+                                <label class="p-2.5 rounded-xl border border-slate-200 bg-white text-center cursor-pointer hover:border-vf-blue">VPBank</label>
+                            </div>
+                            <input type="text" placeholder="Số thẻ ATM nội địa (9704 xxxx xxxx xxxx)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+                        </div>
+
+                        <!-- Payment Method 3: International Credit/Debit Card -->
+                        <div id="payPanel-card" class="hidden mt-3 p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2.5">
+                            <input type="text" placeholder="Số thẻ Quốc tế (4xxx xxxx xxxx xxxx)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" placeholder="MM/YY" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+                                <input type="password" placeholder="CVV/CVC (3 số)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms & Conditions Checkbox -->
+                    <div class="space-y-2">
+                        <label class="flex items-start gap-2.5 cursor-pointer text-xs text-slate-600 select-none">
+                            <input id="checkboxTerms" type="checkbox" checked class="mt-0.5 w-4 h-4 accent-vf-blue rounded">
+                            <span>Tôi cam kết các thông tin cung cấp là chính xác và đồng ý với <button type="button" onclick="openTermsModal()" class="text-vf-blue font-bold underline">Điều khoản & Điều kiện đặt cọc xe VinFast VF 3</button> (Số tiền cọc 15.000.000 VNĐ được khấu trừ trực tiếp vào Hợp đồng mua bán xe).</span>
+                        </label>
+                        <div id="step3ValidationAlert" class="hidden p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-semibold">
+                            Vui lòng tích chọn đồng ý Điều khoản đặt cọc trước khi xác nhận.
+                        </div>
+                    </div>
+
+                    <!-- Complete Order CTA -->
+                    <div class="grid grid-cols-3 gap-3 pt-1">
+                        <button type="button" onclick="switchStep(2)" class="col-span-1 py-3 px-4 rounded-2xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-bold text-xs sm:text-sm transition">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Sửa TT
+                        </button>
+                        <button type="button" onclick="submitDepositOrder()" class="col-span-2 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-vf-blue to-blue-700 hover:from-vf-darkBlue hover:to-blue-800 text-white font-extrabold text-xs sm:text-sm shadow-vf flex items-center justify-center gap-2 transition">
+                            <i class="fa-solid fa-shield-check"></i>
+                            <span>HOÀN TẤT ĐẶT CỌC (15 TRIỆU)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================== SECTION 3: ON-ROAD COST & INSTALLMENT CALCULATOR ==================== -->
+    <section id="cost-estimator" class="py-16 bg-white border-t border-slate-200/80">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-vf-blue bg-vf-lightBlue px-3 py-1 rounded-full">Công cụ tài chính thông minh</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-vf-navy mt-2">Dự Toán Chi Phí Lăn Bánh & Tính Trả Góp VF 3</h2>
+                    <p class="text-sm text-slate-500 mt-1">Tự động đồng bộ theo cấu hình xe bạn đang chọn ở trên • Áp dụng ưu đãi <strong>Miễn 100% Lệ phí trước bạ</strong> cho xe điện.</p>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-2.5 rounded-2xl">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>
+                    <span>Tiết kiệm tới 32.000.000 ₫ lệ phí trước bạ so với xe xăng</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Sub-Column: On-Road Cost Breakdown (6 Cols) -->
+                <div class="lg:col-span-6 bg-vf-surface rounded-3xl p-6 sm:p-8 border border-slate-200/90 space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+                        <h3 class="text-lg font-extrabold text-vf-navy flex items-center gap-2">
+                            <i class="fa-solid fa-receipt text-vf-blue"></i>
+                            <span>1. Bảng tính giá lăn bánh tạm tính</span>
+                        </h3>
+                        <select id="calcLocationSelect" onchange="recalculateFinancials()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-bold text-vf-navy focus:outline-none focus:border-vf-blue">
+                            <option value="hanoi">Đăng ký tại: Hà Nội</option>
+                            <option value="hcm">Đăng ký tại: TP. Hồ Chí Minh</option>
+                            <option value="danang" selected>Đăng ký tại: Đà Nẵng / TP trực thuộc TW</option>
+                            <option value="other">Đăng ký tại: Tỉnh / Thành khác</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between py-2 border-b border-slate-200/70">
+                            <span class="text-slate-600">Giá xe VinFast VF 3 (Đã gồm VAT & Màu sơn):</span>
+                            <span id="calcBaseCarPrice" class="font-bold text-vf-navy">248.000.000 ₫</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-200/70">
+                            <span class="text-slate-600">Phụ kiện chính hãng chọn thêm:</span>
+                            <span id="calcAccessoriesPrice" class="font-bold text-vf-navy">0 ₫</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-slate-200/70">
+                            <div>
+                                <span class="text-slate-600">Lệ phí trước bạ (Xe ô tô điện chạy pin):</span>
+                                <span class="ml-1.5 px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 font-extrabold text-[11px]">MIỄN 100%</span>
+                            </div>
+                            <span class="font-extrabold text-emerald-600">0 ₫</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-200/70">
+                            <span class="text-slate-600">Phí cấp biển số định danh (<span id="calcPlateRegionName">Đà Nẵng</span>):</span>
+                            <span id="calcPlateFee" class="font-bold text-vf-navy">1.000.000 ₫</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-200/70">
+                            <span class="text-slate-600">Phí bảo trì đường bộ (12 tháng - Cá nhân):</span>
+                            <span class="font-bold text-vf-navy">1.560.000 ₫</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-200/70">
+                            <span class="text-slate-600">Bảo hiểm TNDS bắt buộc & Lệ phí đăng kiểm:</span>
+                            <span class="font-bold text-vf-navy">530.700 ₫</span>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-vf-navy text-white flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <div class="text-xs text-slate-300 uppercase font-semibold">Tổng chi phí lăn bánh hoàn chỉnh</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Chưa trừ số tiền đặt cọc 15.000.000 ₫</div>
+                        </div>
+                        <div id="calcTotalOnRoad" class="text-2xl sm:text-3xl font-extrabold text-amber-400">251.090.700 ₫</div>
+                    </div>
+                </div>
+
+                <!-- Right Sub-Column: Interactive Bank Loan / EMI Calculator (6 Cols) -->
+                <div class="lg:col-span-6 bg-vf-surface rounded-3xl p-6 sm:p-8 border border-slate-200/90 space-y-5">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                        <h3 class="text-lg font-extrabold text-vf-navy flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-vf-blue"></i>
+                            <span>2. Bảng tính trả góp ngân hàng</span>
+                        </h3>
+                        <span class="text-xs font-bold text-vf-blue bg-vf-lightBlue px-3 py-1 rounded-xl">Hỗ trợ vay tới 80%</span>
+                    </div>
+
+                    <!-- Sliders -->
+                    <div class="space-y-5">
+                        <!-- Loan Ratio Slider (10% - 80%) -->
+                        <div>
+                            <div class="flex justify-between text-xs sm:text-sm mb-2">
+                                <span class="font-bold text-slate-700">Tỷ lệ vay ngân hàng: <strong id="labelLoanPercent" class="text-vf-blue">70% giá xe</strong></span>
+                                <span id="labelLoanAmount" class="font-extrabold text-vf-navy">173.600.000 ₫</span>
+                            </div>
+                            <input id="sliderLoanPercent" type="range" min="10" max="80" step="5" value="70" oninput="recalculateFinancials()" class="w-full">
+                            <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                                <span>Tối thiểu 10%</span>
+                                <span>50%</span>
+                                <span>Tối đa 80%</span>
+                            </div>
+                        </div>
+
+                        <!-- Loan Duration Slider (1 - 8 Years) -->
+                        <div>
+                            <div class="flex justify-between text-xs sm:text-sm mb-2">
+                                <span class="font-bold text-slate-700">Thời hạn vay:</span>
+                                <span id="labelLoanYears" class="font-extrabold text-vf-blue">7 năm (84 tháng)</span>
+                            </div>
+                            <input id="sliderLoanYears" type="range" min="1" max="8" step="1" value="7" oninput="recalculateFinancials()" class="w-full">
+                            <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                                <span>1 năm</span>
+                                <span>4 năm</span>
+                                <span>8 năm (96 tháng)</span>
+                            </div>
+                        </div>
+
+                        <!-- Interest Rate Package Selector -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1.5">Gói lãi suất ưu đãi dự kiến (%/năm):</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setInterestRate(6.8)" id="rateBtn-6.8" class="py-2 px-3 rounded-xl border-2 border-vf-blue bg-vf-lightBlue/40 text-vf-blue font-extrabold text-xs">
+                                    Ưu đãi VF: 6.8%/năm
+                                </button>
+                                <button type="button" onclick="setInterestRate(7.9)" id="rateBtn-7.9" class="py-2 px-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-xs">
+                                    Ngân hàng: 7.9%/năm
+                                </button>
+                                <button type="button" onclick="setInterestRate(9.0)" id="rateBtn-9" class="py-2 px-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-xs">
+                                    Thả nổi: 9.0%/năm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div class="p-4 rounded-2xl bg-white border border-slate-200">
+                            <div class="text-xs text-slate-500">Số tiền trả trước (Gồm phí lăn bánh)</div>
+                            <div id="calcUpfrontTotal" class="text-xl font-extrabold text-vf-navy mt-1">77.490.700 ₫</div>
+                            <div class="text-[11px] text-emerald-600 font-semibold mt-0.5">Trả trước 30% giá xe + đăng ký</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-vf-blue text-white shadow-vf">
+                            <div class="text-xs text-blue-100">Gốc + Lãi tháng đầu dự kiến</div>
+                            <div id="calcMonthlyEMI" class="text-xl font-extrabold text-white mt-1">3.050.000 ₫/tháng</div>
+                            <div class="text-[11px] text-blue-200 mt-0.5">Dư nợ giảm dần • Chỉ ~100.000đ/ngày</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 4: TECHNICAL SPECIFICATIONS & DESIGN HIGHLIGHTS ==================== -->
+    <section id="specs-section" class="py-16 bg-vf-surface border-t border-slate-200/80">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-vf-blue bg-vf-lightBlue px-3 py-1 rounded-full">Thông số chuẩn nhà sản xuất</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-vf-navy mt-2">Thông Số Kỹ Thuật Chi Tiết VinFast VF 3</h2>
+                <p class="text-sm text-slate-500 mt-1">Thiết kế khối hộp khỏe khoắn, gầm cao 191 mm cùng la-zăng 16 inch vượt trội trong phân khúc xe đô thị cỡ nhỏ.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Spec Card 1: Dimensions & Chassis -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                        <div class="w-10 h-10 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                        </div>
+                        <h3 class="font-extrabold text-base text-vf-navy">Kích Thước & Khung Gầm</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs sm:text-sm">
+                        <li class="flex justify-between"><span class="text-slate-500">Dài x Rộng x Cao:</span><strong class="text-vf-navy">3.190 x 1.679 x 1.622 mm</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Chiều dài cơ sở:</span><strong class="text-vf-navy">2.075 mm</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Khoảng sáng gầm xe:</span><strong class="text-vf-blue">191 mm</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Kích thước La-zăng:</span><strong class="text-vf-navy">16 inch (Hợp kim / Thép)</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Số chỗ ngồi / Cửa:</span><strong class="text-vf-navy">4 - 5 chỗ / 2 cửa hông + 1 cốp</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Dung tích khoang hành lý:</span><strong class="text-vf-navy">285 Lít (Khi gập hàng ghế sau)</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 2: Electric Motor & Battery -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                        <div class="w-10 h-10 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-car-battery"></i>
+                        </div>
+                        <h3 class="font-extrabold text-base text-vf-navy">Động Cơ Điện & Hệ Thống Pin</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs sm:text-sm">
+                        <li class="flex justify-between"><span class="text-slate-500">Công suất tối đa:</span><strong class="text-vf-navy">32 kW (~43 mã lực)</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Mô-men xoắn cực đại:</span><strong class="text-vf-navy">110 Nm</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Tăng tốc 0 – 50 km/h:</span><strong class="text-vf-blue">5,3 giây</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Hệ dẫn động:</span><strong class="text-vf-navy">Cầu sau (RWD)</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Dung lượng pin khả dụng:</span><strong class="text-vf-navy">18,64 kWh (Pin LFP)</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Quãng đường 1 lần sạc:</span><strong class="text-emerald-600">210 km (Chuẩn NEDC)</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Thời gian sạc nhanh:</span><strong class="text-vf-navy">36 phút (10% lên 70% pin)</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 3: Smart Features & Safety -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                        <div class="w-10 h-10 rounded-xl bg-vf-lightBlue text-vf-blue flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </div>
+                        <h3 class="font-extrabold text-base text-vf-navy">Tiện Nghi, An Toàn & Bảo Hành</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs sm:text-sm">
+                        <li class="flex justify-between"><span class="text-slate-500">Màn hình giải trí trung tâm:</span><strong class="text-vf-blue">Cảm ứng 10 inch</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Hệ thống an toàn:</span><strong class="text-vf-navy">ABS, EBD, Kiểm soát lực kéo TCS</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Hỗ trợ khởi hành ngang dốc:</span><strong class="text-vf-navy">HSA tiêu chuẩn + Phanh đĩa trước</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Túi khí & Phanh tay:</span><strong class="text-vf-navy">Túi khí người lái + Phanh tay điện tử</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Bảo hành xe chính hãng:</span><strong class="text-emerald-600">7 năm hoặc 160.000 km</strong></li>
+                        <li class="flex justify-between"><span class="text-slate-500">Bảo hành Pin (Mua pin):</span><strong class="text-emerald-600">8 năm (Không giới hạn km)</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 5: POLICIES & BENEFITS ==================== -->
+    <section id="policy-section" class="py-14 bg-vf-navy text-white">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="w-11 h-11 rounded-xl bg-vf-blue flex items-center justify-center text-white text-lg mb-4">
+                        <i class="fa-solid fa-charging-station"></i>
+                    </div>
+                    <h4 class="font-extrabold text-base mb-1.5">Hệ sinh thái 150.000+ cổng sạc</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Phủ sóng khắp 63 tỉnh thành tại các trạm dừng nghỉ, trung tâm thương mại, chung cư và quốc lộ.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="w-11 h-11 rounded-xl bg-vf-blue flex items-center justify-center text-white text-lg mb-4">
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+                    <h4 class="font-extrabold text-base mb-1.5">Chính sách thuê pin ưu việt</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Chỉ từ 900.000đ/tháng. VinFast chịu toàn bộ rủi ro về tuổi thọ pin và thay mới miễn phí khi dưới 70%.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="w-11 h-11 rounded-xl bg-vf-blue flex items-center justify-center text-white text-lg mb-4">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+                    <h4 class="font-extrabold text-base mb-1.5">Cứu hộ 24/7 & Sửa chữa lưu động</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">An tâm trên mọi hành trình với dịch vụ Mobile Service và cứu hộ miễn phí trong suốt thời gian bảo hành.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="w-11 h-11 rounded-xl bg-vf-blue flex items-center justify-center text-white text-lg mb-4">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <h4 class="font-extrabold text-base mb-1.5">Đặt cọc trực tuyến an toàn</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Biên nhận điện tử xác thực ngay lập tức. Ưu tiên giao xe sớm theo thứ tự mã đơn cọc trên toàn quốc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-10 text-xs border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-vf-blue flex items-center justify-center text-white font-extrabold">V</div>
+                <div>
+                    <div class="font-bold text-white">CÔNG TY TNHH KINH DOANH THƯƠNG MẠI VÀ DỊCH VỤ VINFAST</div>
+                    <div>Giao diện mô phỏng trải nghiệm Cấu hình & Đặt cọc VinFast VF 3</div>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-4">
+                <span>Hotline CSKH: <strong class="text-white">1900 23 23 89</strong></span>
+                <span>•</span>
+                <span>Email: <strong class="text-white">support.vn@vinfastauto.com</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL 1: ELECTRONIC DEPOSIT RECEIPT (BIÊN NHẬN ĐẶT CỌC ĐIỆN TỬ) ==================== -->
+    <div id="receiptModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div id="receiptModalContent" class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative my-8">
+            <!-- Top Badge -->
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-vf-blue flex items-center justify-center text-white font-extrabold text-lg">V</div>
+                    <div>
+                        <div class="text-sm font-extrabold text-vf-navy">BIÊN NHẬN ĐẶT CỌC XE ĐIỆN VINFAST VF 3</div>
+                        <div class="text-xs text-slate-500">Xác nhận giao dịch trực tuyến • VinFast Việt Nam</div>
+                    </div>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-extrabold text-xs flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check"></i> ĐÃ XÁC NHẬN
+                </span>
+            </div>
+
+            <!-- Order Code & Timestamp -->
+            <div class="p-4 rounded-2xl bg-vf-lightBlue/60 border border-blue-200 flex flex-wrap items-center justify-between gap-3 mb-5">
+                <div>
+                    <div class="text-[11px] uppercase font-bold text-slate-500">Mã đơn đặt cọc (Dùng để tra cứu)</div>
+                    <div id="receiptOrderCode" class="font-mono text-xl font-extrabold text-vf-blue">VF3-892451</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-[11px] uppercase font-bold text-slate-500">Thời gian ghi nhận</div>
+                    <div id="receiptTimestamp" class="text-xs font-bold text-vf-navy">15/05/2025 - 10:30</div>
+                </div>
+            </div>
+
+            <!-- Details Table -->
+            <div class="space-y-3 text-xs sm:text-sm mb-6">
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Khách hàng / Chủ xe:</span>
+                    <strong id="receiptCustomerName" class="col-span-2 text-vf-navy text-right">Nguyễn Văn Minh</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Số điện thoại / CCCD:</span>
+                    <strong id="receiptCustomerPhone" class="col-span-2 text-vf-navy text-right">0905123456 • 001095001234</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Showroom nhận xe:</span>
+                    <strong id="receiptShowroom" class="col-span-2 text-vf-navy text-right">VinFast Ngô Quyền - Đà Nẵng</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Cấu hình xe & Pin:</span>
+                    <strong id="receiptCarSpec" class="col-span-2 text-vf-blue text-right">VinFast VF 3 (Thuê pin)</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Màu ngoại thất:</span>
+                    <strong id="receiptExterior" class="col-span-2 text-vf-navy text-right">Vàng Nóc Trắng (Summer Yellow)</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Phụ kiện đi kèm:</span>
+                    <strong id="receiptAccessories" class="col-span-2 text-vf-navy text-right">Không chọn</strong>
+                </div>
+                <div class="grid grid-cols-3 py-1.5 border-b border-slate-100">
+                    <span class="text-slate-500">Tổng giá xe niêm yết:</span>
+                    <strong id="receiptTotalCarPrice" class="col-span-2 text-vf-navy text-right">248.000.000 VNĐ</strong>
+                </div>
+                <div class="grid grid-cols-3 py-2.5 px-3 rounded-xl bg-emerald-50 border border-emerald-200 items-center">
+                    <span class="font-bold text-emerald-900">Số tiền đặt cọc đã ghi nhận:</span>
+                    <strong class="col-span-2 text-lg font-extrabold text-emerald-700 text-right">15.000.000 VNĐ</strong>
+                </div>
+            </div>
+
+            <!-- Action Buttons (Hidden when printing) -->
+            <div class="no-print flex flex-wrap items-center justify-end gap-3 pt-2 border-t border-slate-200">
+                <button onclick="window.print()" class="px-4 py-2.5 rounded-xl border border-slate-300 hover:border-vf-blue text-slate-700 font-bold text-xs flex items-center gap-2 transition">
+                    <i class="fa-solid fa-print text-vf-blue"></i>
+                    <span>In / Lưu PDF biên nhận</span>
+                </button>
+                <button onclick="closeReceiptModal()" class="px-5 py-2.5 rounded-xl bg-vf-blue hover:bg-vf-darkBlue text-white font-extrabold text-xs transition">
+                    Hoàn tất & Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: ORDER LOOKUP (TRA CỨU ĐƠN CỌC) ==================== -->
+    <div id="lookupModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 class="text-base font-extrabold text-vf-navy flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-vf-blue"></i>
+                    <span>Tra Cứu Trạng Thái Đơn Đặt Cọc VF 3</span>
+                </h3>
+                <button onclick="closeOrderLookupModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-500">Nhập Mã đơn cọc (VD: <code class="font-mono font-bold text-vf-blue">VF38899</code>) hoặc Số điện thoại đặt cọc để kiểm tra tiến độ phân bổ xe.</p>
+
+            <div class="flex gap-2">
+                <input id="lookupQueryInput" type="text" placeholder="Nhập mã đơn cọc hoặc SĐT (VD: VF38899)" class="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-vf-blue">
+                <button onclick="performOrderLookup()" class="px-5 py-2.5 rounded-xl bg-vf-blue hover:bg-vf-darkBlue text-white font-bold text-xs sm:text-sm transition">
+                    Tra cứu
+                </button>
+            </div>
+
+            <div id="lookupResultBox" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 3: DEPOSIT TERMS & CONDITIONS ==================== -->
+    <div id="termsModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 class="text-base font-extrabold text-vf-navy">Điều Khoản & Chính Sách Đặt Cọc VinFast VF 3</h3>
+                <button onclick="closeTermsModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="text-xs text-slate-600 space-y-2.5 max-h-80 overflow-y-auto leading-relaxed pr-2">
+                <p><strong>1. Mức tiền đặt cọc:</strong> 15.000.000 VNĐ/xe (Mười lăm triệu đồng). Khoản tiền đặt cọc sẽ được khấu trừ trực tiếp vào tổng giá trị Hợp đồng mua bán xe chính thức tại Showroom VinFast.</p>
+                <p><strong>2. Quyền lợi ưu tiên:</strong> Khách hàng đặt cọc sớm được ưu tiên phân bổ số thứ tự nhận xe theo màu sắc đã cấu hình và hưởng nguyên vẹn các quyền lợi miễn 100% lệ phí trước bạ theo quy định hiện hành.</p>
+                <p><strong>3. Chuyển nhượng & Thay đổi cấu hình:</strong> Khách hàng được phép thay đổi màu sắc ngoại thất hoặc phương án Thuê pin / Mua pin khi ký Hợp đồng mua bán chính thức tại Đại lý/Showroom đã đăng ký.</p>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeTermsModal()" class="px-5 py-2 rounded-xl bg-vf-blue text-white font-bold text-xs">Tôi đã hiểu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-2xl bg-vf-navy text-white text-xs font-bold shadow-2xl border border-slate-700 flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Đã cập nhật cấu hình xe!</span>
+    </div>
+
+    <!-- APPLICATION JAVASCRIPT -->
+    <script>
+        // ==================== DATA CATALOG ====================
+        const EXTERIOR_COLORS = [
+            // 4 Basic Colors (Free - Same roof color as body)
+            {
+                id: 'white',
+                name: 'Trắng (Infinity Blanc)',
+                group: 'basic',
+                price: 0,
+                bodyHex: '#F4F6F8',
+                roofHex: '#F4F6F8',
+                badgeText: 'Màu Cơ Bản (Miễn phí)'
+            },
+            {
+                id: 'red',
+                name: 'Đỏ (Crimson Red)',
+                group: 'basic',
+                price: 0,
+                bodyHex: '#C8102E',
+                roofHex: '#C8102E',
+                badgeText: 'Màu Cơ Bản (Miễn phí)'
+            },
+            {
+                id: 'blue',
+                name: 'Xanh Dương Đậm (VinFast Blue)',
+                group: 'basic',
+                price: 0,
+                bodyHex: '#103A8C',
+                roofHex: '#103A8C',
+                badgeText: 'Màu Cơ Bản (Miễn phí)'
+            },
+            {
+                id: 'grey',
+                name: 'Xám (Zenith Grey)',
+                group: 'basic',
+                price: 0,
+                bodyHex: '#5C646D',
+                roofHex: '#5C646D',
+                badgeText: 'Màu Cơ Bản (Miễn phí)'
+            },
+            // 5 Advanced Colors (+8,000,000 VND - Two-Tone White Roof)
+            {
+                id: 'yellow',
+                name: 'Vàng Nóc Trắng (Summer Yellow)',
+                group: 'advanced',
+                price: 8000000,
+                bodyHex: '#F5B700',
+                roofHex: '#FFFFFF',
+                badgeText: 'Màu Nâng Cao (Phối nóc trắng)'
+            },
+            {
+                id: 'pink',
+                name: 'Hồng Phấn Nóc Trắng (Rose Pink)',
+                group: 'advanced',
+                price: 8000000,
+                bodyHex: '#F29BB4',
+                roofHex: '#FFFFFF',
+                badgeText: 'Màu Nâng Cao (Phối nóc trắng)'
+            },
+            {
+                id: 'mint',
+                name: 'Xanh Lá Nhạt Nóc Trắng (Urban Mint)',
+                group: 'advanced',
+                price: 8000000,
+                bodyHex: '#76C7B2',
+                roofHex: '#FFFFFF',
+                badgeText: 'Màu Nâng Cao (Phối nóc trắng)'
+            },
+            {
+                id: 'skyblue',
+                name: 'Xanh Dương Nhạt Nóc Trắng (Sky Blue)',
+                group: 'advanced',
+                price: 8000000,
+                bodyHex: '#63B3ED',
+                roofHex: '#FFFFFF',
+                badgeText: 'Màu Nâng Cao (Phối nóc trắng)'
+            },
+            {
+                id: 'purple',
+                name: 'Hồng Tím Nóc Trắng (Iris Berry)',
+                group: 'advanced',
+                price: 8000000,
+                bodyHex: '#9A4E96',
+                roofHex: '#FFFFFF',
+                badgeText: 'Màu Nâng Cao (Phối nóc trắng)'
+            }
+        ];
+
+        const ACCESSORIES_CATALOG = [
+            {
+                id: 'charger22',
+                name: 'Bộ sạc di động VinFast 2.2 kW (Sạc ổ điện dân dụng tại nhà)',
+                price: 4000000,
+                icon: 'fa-plug-circle-bolt'
+            },
+            {
+                id: 'film3m',
+                name: 'Gói phim cách nhiệt 3M Crystalline chính hãng toàn xe',
+                price: 5500000,
+                icon: 'fa-sun-plant-wilt'
+            },
+            {
+                id: 'floormat',
+                name: 'Bộ thảm sàn khuôn đúc TPE VF 3 & Lót cốp chống nước',
+                price: 1800000,
+                icon: 'fa-layer-group'
+            },
+            {
+                id: 'dashcam',
+                name: 'Camera hành trình Trước/Sau độ phân giải 2K góc rộng',
+                price: 3200000,
+                icon: 'fa-video'
+            }
+        ];
+
+        const SHOWROOMS_BY_PROVINCE = {
+            'Hà Nội': [
+                'VinFast Times City - Hai Bà Trưng, Hà Nội',
+                'VinFast Royal City - Thanh Xuân, Hà Nội',
+                'VinFast Vinhomes Riverside - Long Biên, Hà Nội',
+                'VinFast Phạm Văn Đồng - Bắc Từ Liêm, Hà Nội'
+            ],
+            'TP. Hồ Chí Minh': [
+                'VinFast Landmark 81 - Bình Thạnh, TP.HCM',
+                'VinFast Thảo Điền - TP. Thủ Đức, TP.HCM',
+                'VinFast Phú Mỹ Hưng - Quận 7, TP.HCM',
+                'VinFast Cộng Hòa - Tân Bình, TP.HCM'
+            ],
+            'Đà Nẵng': [
+                'VinFast Vincom Ngô Quyền - Sơn Trà, Đà Nẵng',
+                'VinFast Điện Biên Phủ - Thanh Khê, Đà Nẵng',
+                'VinFast Cách Mạng Tháng 8 - Cẩm Lệ, Đà Nẵng'
+            ],
+            'Hải Phòng': [
+                'VinFast Imperia Hồng Bàng - Hải Phòng',
+                'VinFast Lê Hồng Phong - Ngô Quyền, Hải Phòng'
+            ],
+            'Cần Thơ': [
+                'VinFast Hùng Vương - Ninh Kiều, Cần Thơ',
+                'VinFast Quang Trung - Cái Răng, Cần Thơ'
+            ],
+            'Bình Dương': [
+                'VinFast Aeon Mall Thuận An - Bình Dương',
+                'VinFast Thủ Dầu Một - Bình Dương'
+            ],
+            'Quảng Ninh': [
+                'VinFast Hạ Long - Quảng Ninh',
+                'VinFast Cẩm Phả - Quảng Ninh'
+            ]
+        };
+
+        // ==================== APPLICATION STATE ====================
+        const appState = {
+            currentStep: 1,
+            currentView: 'front34',
+            headlightsOn: true,
+            motionOn: false,
+            studioBackdrop: 'white',
+            batteryPlan: 'lease', // 'lease' (240M) or 'buy' (322M)
+            leaseMonthlyFee: 900000,
+            leaseMonthlyLabel: 'Dưới 1.500 km/tháng',
+            selectedColor: EXTERIOR_COLORS[4], // Default: Summer Yellow (2-Tone)
+            selectedAccessories: new Set(),
+            customerType: 'personal',
+            discountAmount: 0,
+            voucherCode: '',
+            paymentMethod: 'qr',
+            orderCode: 'VF3' + Math.floor(100000 + Math.random() * 900000),
+            interestRate: 6.8,
+            savedOrders: [
+                {
+                    code: 'VF38899',
+                    name: 'Trần Hoàng Nam',
+                    phone: '0912345678',
+                    color: 'Vàng Nóc Trắng (Summer Yellow)',
+                    plan: 'Thuê pin (240.000.000 ₫)',
+                    showroom: 'VinFast Vincom Ngô Quyền - Sơn Trà, Đà Nẵng',
+                    status: 'Đã xác nhận cọc 15.000.000 ₫ - Đang ưu tiên phân bổ số VIN'
+                }
+            ]
+        };
+
+        // ==================== FORMATTERS ====================
+        function formatVND(amount) {
+            return amount.toLocaleString('vi-VN') + ' ₫';
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2800);
+        }
+
+        // ==================== INITIALIZATION ====================
+        function initApp() {
+            renderColorSwatches();
+            renderAccessoriesList();
+            updateShowroomList();
+            document.getElementById('qrOrderCodeDisplay').textContent = appState.orderCode;
+            updateAllPricesAndUI();
+            renderDefaultLookupDemo();
+        }
+
+        // ==================== COLOR PICKER RENDERER ====================
+        function renderColorSwatches() {
+            const basicGrid = document.getElementById('basicColorsGrid');
+            const advancedGrid = document.getElementById('advancedColorsGrid');
+            basicGrid.innerHTML = '';
+            advancedGrid.innerHTML = '';
+
+            EXTERIOR_COLORS.forEach(color => {
+                const isSelected = appState.selectedColor.id === color.id;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => selectExteriorColor(color.id);
+                btn.title = color.name;
+                btn.className = `group relative p-1.5 rounded-2xl border-2 transition flex flex-col items-center gap-1 ${
+                    isSelected
+                        ? 'border-vf-blue bg-vf-lightBlue/40 shadow-sm scale-105'
+                        : 'border-slate-200 hover:border-slate-300 bg-white'
+                }`;
+
+                // Two-tone swatch for advanced colors (Top half white roof, bottom half body color)
+                const swatchHtml = color.group === 'advanced'
+                    ? `<div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300 shadow-inner flex flex-col">
+                           <div class="h-1/3 w-full bg-white border-b border-slate-200"></div>
+                           <div class="h-2/3 w-full" style="background-color: ${color.bodyHex}"></div>
+                       </div>`
+                    : `<div class="w-10 h-10 rounded-full border border-slate-300 shadow-inner" style="background-color: ${color.bodyHex}"></div>`;
+
+                btn.innerHTML = `
+                    ${swatchHtml}
+                    <span class="text-[10px] font-bold text-slate-700 truncate w-full text-center">${color.name.split(' (')[0]}</span>
+                `;
+
+                if (color.group === 'basic') {
+                    basicGrid.appendChild(btn);
+                } else {
+                    advancedGrid.appendChild(btn);
+                }
+            });
+        }
+
+        function selectExteriorColor(colorId) {
+            const found = EXTERIOR_COLORS.find(c => c.id === colorId);
+            if (!found) return;
+            appState.selectedColor = found;
+
+            // Update SVG body & roof fills across all views
+            document.querySelectorAll('.vf3-body-paint').forEach(el => {
+                el.setAttribute('fill', found.bodyHex);
+            });
+            document.querySelectorAll('.vf3-roof-paint').forEach(el => {
+                el.setAttribute('fill', found.roofHex);
+            });
+
+            // Update Studio & Configurator Labels
+            document.getElementById('liveColorName').textContent = found.name;
+            document.getElementById('liveColorTypeBadge').textContent = found.badgeText;
+            document.getElementById('configColorLabel').textContent = found.name;
+            document.getElementById('selectedColorPriceTag').textContent = found.price > 0 ? `+ ${formatVND(found.price)}` : 'Miễn phí (+0 ₫)';
+
+            renderColorSwatches();
+            updateAllPricesAndUI();
+        }
+
+        // ==================== ACCESSORIES RENDERER ====================
+        function renderAccessoriesList() {
+            const container = document.getElementById('accessoriesListContainer');
+            container.innerHTML = '';
+
+            ACCESSORIES_CATALOG.forEach(acc => {
+                const isChecked = appState.selectedAccessories.has(acc.id);
+                const row = document.createElement('div');
+                row.onclick = () => toggleAccessory(acc.id);
+                row.className = `p-3 rounded-2xl border cursor-pointer flex items-center justify-between gap-3 transition ${
+                    isChecked ? 'border-vf-blue bg-vf-lightBlue/30' : 'border-slate-200 hover:border-slate-300 bg-white'
+                }`;
+                row.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl ${isChecked ? 'bg-vf-blue text-white' : 'bg-slate-100 text-slate-600'} flex items-center justify-center text-xs shrink-0">
+                            <i class="fa-solid ${acc.icon}"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-vf-navy">${acc.name}</div>
+                            <div class="text-[11px] font-bold text-vf-blue">+ ${formatVND(acc.price)}</div>
+                        </div>
+                    </div>
+                    <div class="w-5 h-5 rounded-md border ${isChecked ? 'bg-vf-blue border-vf-blue text-white' : 'border-slate-300 bg-white'} flex items-center justify-center text-xs shrink-0">
+                        ${isChecked ? '<i class="fa-solid fa-check"></i>' : ''}
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function toggleAccessory(accId) {
+            if (appState.selectedAccessories.has(accId)) {
+                appState.selectedAccessories.delete(accId);
+            } else {
+                appState.selectedAccessories.add(accId);
+            }
+            renderAccessoriesList();
+            updateAllPricesAndUI();
+        }
+
+        // ==================== BATTERY PLAN & TIERS ====================
+        function selectBatteryPlan(plan) {
+            appState.batteryPlan = plan;
+            const leaseCard = document.getElementById('cardBattery-lease');
+            const buyCard = document.getElementById('cardBattery-buy');
+            const iconLease = document.getElementById('iconBattery-lease');
+            const iconBuy = document.getElementById('iconBattery-buy');
+            const tiersBox = document.getElementById('batteryLeaseTiersBox');
+
+            if (plan === 'lease') {
+                leaseCard.className = 'cursor-pointer rounded-2xl p-4 border-2 border-vf-blue bg-vf-lightBlue/35 transition relative';
+                buyCard.className = 'cursor-pointer rounded-2xl p-4 border-2 border-slate-200 hover:border-slate-300 bg-white transition relative';
+                iconLease.className = 'fa-solid fa-circle-check text-vf-blue text-lg';
+                iconBuy.className = 'fa-regular fa-circle text-slate-400 text-lg';
+                tiersBox.classList.remove('hidden');
+            } else {
+                buyCard.className = 'cursor-pointer rounded-2xl p-4 border-2 border-vf-blue bg-vf-lightBlue/35 transition relative';
+                leaseCard.className = 'cursor-pointer rounded-2xl p-4 border-2 border-slate-200 hover:border-slate-300 bg-white transition relative';
+                iconBuy.className = 'fa-solid fa-circle-check text-vf-blue text-lg';
+                iconLease.className = 'fa-regular fa-circle text-slate-400 text-lg';
+                tiersBox.classList.add('hidden');
+            }
+            updateAllPricesAndUI();
+        }
+
+        function selectLeaseTier(fee, label) {
+            appState.leaseMonthlyFee = fee;
+            appState.leaseMonthlyLabel = label;
+            [900000, 1200000, 2000000].forEach(tier => {
+                const el = document.getElementById(`leaseTier-${tier}`);
+                if (tier === fee) {
+                    el.className = 'flex items-center justify-between p-2.5 rounded-xl bg-white border border-vf-blue cursor-pointer text-xs transition';
+                } else {
+                    el.className = 'flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer text-xs transition';
+                }
+            });
+            updateAllPricesAndUI();
+        }
+
+        // ==================== STUDIO INTERACTIVE CONTROLS ====================
+        function switchCarView(viewName) {
+            appState.currentView = viewName;
+            const views = ['front34', 'side', 'rear34', 'interior'];
+            views.forEach(v => {
+                const svgEl = document.getElementById(`carView-${v}`);
+                const btnEl = document.getElementById(`viewBtn-${v}`);
+                if (v === viewName) {
+                    svgEl.classList.remove('hidden');
+                    btnEl.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-vf-blue text-white shadow-sm transition flex items-center gap-1.5';
+                } else {
+                    svgEl.classList.add('hidden');
+                    btnEl.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/90 text-slate-700 hover:bg-white border border-slate-200 transition flex items-center gap-1.5';
+                }
+            });
+        }
+
+        function toggleHeadlights() {
+            appState.headlightsOn = !appState.headlightsOn;
+            const beamGroup = document.getElementById('headlightBeamsFront');
+            const bulbs = document.querySelectorAll('.headlight-bulb');
+            const btn = document.getElementById('btnToggleLights');
+
+            if (appState.headlightsOn) {
+                beamGroup.classList.remove('hidden');
+                bulbs.forEach(b => b.setAttribute('fill', '#FEF9C3'));
+                btn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-white shadow-sm transition';
+                btn.innerHTML = '<i class="fa-solid fa-lightbulb"></i><span>Đèn LED: BẬT</span>';
+            } else {
+                beamGroup.classList.add('hidden');
+                bulbs.forEach(b => b.setAttribute('fill', '#475569'));
+                btn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-200 text-slate-600 transition';
+                btn.innerHTML = '<i class="fa-regular fa-lightbulb"></i><span>Đèn LED: TẮT</span>';
+            }
+        }
+
+        function toggleDriveMotion() {
+            appState.motionOn = !appState.motionOn;
+            const wheels = document.querySelectorAll('.car-wheel');
+            const roadLine = document.getElementById('roadLineFront');
+            const btn = document.getElementById('btnToggleMotion');
+
+            if (appState.motionOn) {
+                wheels.forEach(w => w.classList.add('wheel-spinning'));
+                roadLine.classList.add('road-moving');
+                btn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-vf-blue text-white shadow-sm transition';
+                btn.innerHTML = '<i class="fa-solid fa-gauge-high"></i><span>Đang lăn bánh</span>';
+            } else {
+                wheels.forEach(w => w.classList.remove('wheel-spinning'));
+                roadLine.classList.remove('road-moving');
+                btn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                btn.innerHTML = '<i class="fa-solid fa-gauge-high"></i><span>Lăn bánh</span>';
+            }
+        }
+
+        function setStudioBackdrop(mode) {
+            appState.studioBackdrop = mode;
+            const stage = document.getElementById('studioStage');
+            const title = document.getElementById('studioHeaderTitle');
+            const subtitle = document.getElementById('studioColorSubtitle');
+            const colorName = document.getElementById('liveColorName');
+
+            stage.classList.remove('studio-bg-white', 'studio-bg-night', 'studio-bg-beach');
+            stage.classList.add(`studio-bg-${mode}`);
+
+            ['white', 'night', 'beach'].forEach(m => {
+                const b = document.getElementById(`bgBtn-${m}`);
+                b.classList.toggle('border-2', m === mode);
+                b.classList.toggle('border-vf-blue', m === mode);
+            });
+
+            if (mode === 'night') {
+                title.className = 'text-2xl sm:text-3xl font-extrabold tracking-tight text-white transition-colors';
+                subtitle.className = 'text-xs sm:text-sm font-medium text-slate-300 mt-0.5';
+                colorName.className = 'text-amber-300';
+            } else {
+                title.className = 'text-2xl sm:text-3xl font-extrabold tracking-tight text-vf-navy transition-colors';
+                subtitle.className = 'text-xs sm:text-sm font-medium text-slate-600 mt-0.5';
+                colorName.className = 'text-vf-navy';
+            }
+        }
+
+        // ==================== PRICING & FINANCIAL CALCULATIONS ====================
+        function getBasePrice() {
+            return appState.batteryPlan === 'lease' ? 240000000 : 322000000;
+        }
+
+        function getAccessoriesTotal() {
+            let sum = 0;
+            ACCESSORIES_CATALOG.forEach(acc => {
+                if (appState.selectedAccessories.has(acc.id)) sum += acc.price;
+            });
+            return sum;
+        }
+
+        function getTotalListedCarPrice() {
+            const base = getBasePrice();
+            const paint = appState.selectedColor.price;
+            const acc = getAccessoriesTotal();
+            return Math.max(0, base + paint + acc - appState.discountAmount);
+        }
+
+        function updateAllPricesAndUI() {
+            const basePrice = getBasePrice();
+            const paintPrice = appState.selectedColor.price;
+            const accTotal = getAccessoriesTotal();
+            const finalCarPrice = getTotalListedCarPrice();
+
+            // Studio Live Bar
+            document.getElementById('studioLiveTotalPrice').textContent = finalCarPrice.toLocaleString('vi-VN') + ' VNĐ';
+            document.getElementById('studioLiveBatteryMode').textContent =
+                appState.batteryPlan === 'lease'
+                    ? `Thuê pin (${formatVND(appState.leaseMonthlyFee)}/tháng)`
+                    : 'Mua kèm pin';
+
+            // Step 3 Summary
+            document.getElementById('summaryBatteryPlan').textContent =
+                appState.batteryPlan === 'lease'
+                    ? `VF 3 - Thuê pin (${formatVND(basePrice)})`
+                    : `VF 3 - Mua kèm pin (${formatVND(basePrice)})`;
+
+            document.getElementById('summaryExteriorColor').textContent =
+                `${appState.selectedColor.name} (+${formatVND(paintPrice)})`;
+
+            const accNames = ACCESSORIES_CATALOG.filter(a => appState.selectedAccessories.has(a.id)).map(a => a.name.split(' (')[0]);
+            document.getElementById('summaryAccessories').textContent =
+                accNames.length > 0 ? `${accNames.length} món (+${formatVND(accTotal)})` : 'Không chọn (+0 ₫)';
+
+            const discountRow = document.getElementById('summaryDiscountRow');
+            if (appState.discountAmount > 0) {
+                discountRow.classList.remove('hidden');
+                document.getElementById('summaryDiscountVal').textContent = `-${formatVND(appState.discountAmount)}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            document.getElementById('summaryFinalCarPrice').textContent = finalCarPrice.toLocaleString('vi-VN') + ' VNĐ';
+
+            recalculateFinancials();
+        }
+
+        function setInterestRate(rate) {
+            appState.interestRate = rate;
+            [6.8, 7.9, 9].forEach(r => {
+                const btn = document.getElementById(`rateBtn-${r}`);
+                if (!btn) return;
+                if (r === rate) {
+                    btn.className = 'py-2 px-3 rounded-xl border-2 border-vf-blue bg-vf-lightBlue/40 text-vf-blue font-extrabold text-xs';
+                } else {
+                    btn.className = 'py-2 px-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-xs';
+                }
+            });
+            recalculateFinancials();
+        }
+
+        function recalculateFinancials() {
+            const carAndPaint = getBasePrice() + appState.selectedColor.price - appState.discountAmount;
+            const accTotal = getAccessoriesTotal();
+            const totalInvoice = carAndPaint + accTotal;
+
+            const loc = document.getElementById('calcLocationSelect').value;
+            let plateFee = 1000000;
+            let regionLabel = 'Đà Nẵng / TP TW';
+            if (loc === 'hanoi') {
+                plateFee = 20000000;
+                regionLabel = 'Hà Nội';
+            } else if (loc === 'hcm') {
+                plateFee = 20000000;
+                regionLabel = 'TP. Hồ Chí Minh';
+            } else if (loc === 'other') {
+                plateFee = 1000000;
+                regionLabel = 'Tỉnh / Thành khác';
+            }
+
+            const roadFee = 1560000;
+            const insuranceAndInspection = 530700;
+            const totalOnRoad = totalInvoice + plateFee + roadFee + insuranceAndInspection;
+
+            document.getElementById('calcBaseCarPrice').textContent = formatVND(carAndPaint);
+            document.getElementById('calcAccessoriesPrice').textContent = formatVND(accTotal);
+            document.getElementById('calcPlateRegionName').textContent = regionLabel;
+            document.getElementById('calcPlateFee').textContent = formatVND(plateFee);
+            document.getElementById('calcTotalOnRoad').textContent = formatVND(totalOnRoad);
+
+            // Installment calculation
+            const loanPercent = parseInt(document.getElementById('sliderLoanPercent').value, 10);
+            const loanYears = parseInt(document.getElementById('sliderLoanYears').value, 10);
+            const loanMonths = loanYears * 12;
+
+            const loanPrincipal = Math.round((totalInvoice * loanPercent) / 100);
+            const upfrontPayment = totalOnRoad - loanPrincipal;
+
+            const monthlyPrincipal = loanPrincipal / loanMonths;
+            const firstMonthInterest = (loanPrincipal * (appState.interestRate / 100)) / 12;
+            const firstMonthEMI = Math.round(monthlyPrincipal + firstMonthInterest);
+
+            document.getElementById('labelLoanPercent').textContent = `${loanPercent}% giá xe`;
+            document.getElementById('labelLoanAmount').textContent = formatVND(loanPrincipal);
+            document.getElementById('labelLoanYears').textContent = `${loanYears} năm (${loanMonths} tháng)`;
+            document.getElementById('calcUpfrontTotal').textContent = formatVND(upfrontPayment);
+            document.getElementById('calcMonthlyEMI').textContent = `${formatVND(firstMonthEMI)}/tháng`;
+        }
+
+        // ==================== STEP WIZARD & FORM LOGIC ====================
+        function switchStep(stepNumber) {
+            appState.currentStep = stepNumber;
+            [1, 2, 3].forEach(s => {
+                const content = document.getElementById(`stepContent-${s}`);
+                const tab = document.getElementById(`stepTab-${s}`);
+                if (s === stepNumber) {
+                    content.classList.remove('hidden');
+                    tab.className = 'flex items-center gap-2 p-2.5 rounded-xl bg-vf-blue text-white font-bold text-xs sm:text-sm shadow-sm transition text-left';
+                    tab.querySelector('span:first-child').className = 'w-6 h-6 rounded-full bg-white text-vf-blue flex items-center justify-center font-extrabold text-xs shrink-0';
+                } else {
+                    content.classList.add('hidden');
+                    tab.className = 'flex items-center gap-2 p-2.5 rounded-xl bg-white text-slate-600 hover:bg-slate-100 font-semibold text-xs sm:text-sm border border-slate-200 transition text-left';
+                    tab.querySelector('span:first-child').className = 'w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-extrabold text-xs shrink-0';
+                }
+            });
+        }
+
+        function scrollToStep(stepNumber) {
+            switchStep(stepNumber);
+            document.getElementById('studio-configurator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setCustomerType(type) {
+            appState.customerType = type;
+            const btnPersonal = document.getElementById('custTypeBtn-personal');
+            const btnCorp = document.getElementById('custTypeBtn-corporate');
+            const corpBox = document.getElementById('corporateFieldsBox');
+            const labelId = document.getElementById('labelIdentity');
+            const inputId = document.getElementById('inputIdentity');
+
+            if (type === 'personal') {
+                btnPersonal.className = 'py-2.5 rounded-xl bg-white text-vf-blue font-extrabold text-xs shadow-sm transition';
+                btnCorp.className = 'py-2.5 rounded-xl text-slate-600 font-bold text-xs hover:text-vf-navy transition';
+                corpBox.classList.add('hidden');
+                labelId.innerHTML = 'Số CCCD / CMND <span class="text-red-500">*</span>';
+                inputId.placeholder = 'Nhập 12 số CCCD';
+            } else {
+                btnCorp.className = 'py-2.5 rounded-xl bg-white text-vf-blue font-extrabold text-xs shadow-sm transition';
+                btnPersonal.className = 'py-2.5 rounded-xl text-slate-600 font-bold text-xs hover:text-vf-navy transition';
+                corpBox.classList.remove('hidden');
+                labelId.innerHTML = 'Mã số doanh nghiệp / MST <span class="text-red-500">*</span>';
+                inputId.placeholder = 'Nhập Mã số thuế công ty';
+            }
+        }
+
+        function updateShowroomList() {
+            const prov = document.getElementById('selectProvince').value;
+            const showrooms = SHOWROOMS_BY_PROVINCE[prov] || [];
+            const selectEl = document.getElementById('selectShowroom');
+            selectEl.innerHTML = showrooms.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+
+        function quickFillVoucher(code) {
+            document.getElementById('inputVoucher').value = code;
+            applyPromoVoucher();
+        }
+
+        function applyPromoVoucher() {
+            const code = document.getElementById('inputVoucher').value.trim().toUpperCase();
+            const feedback = document.getElementById('voucherFeedback');
+            if (code === 'VINFASTVIP' || code === 'VF3XANH') {
+                appState.discountAmount = 3000000;
+                appState.voucherCode = code;
+                feedback.className = 'text-[11px] text-emerald-600 font-bold mt-1';
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i>Đã áp dụng mã ${code}: Ưu đãi giảm ngay 3.000.000 ₫!`;
+                updateAllPricesAndUI();
+                showToast(`Áp dụng thành công mã ưu đãi ${code}!`);
+            } else {
+                appState.discountAmount = 0;
+                feedback.className = 'text-[11px] text-red-600 font-semibold mt-1';
+                feedback.innerHTML = `Mã "${code || '...'}" không hợp lệ. Hãy thử mã <strong>VINFASTVIP</strong>.`;
+                updateAllPricesAndUI();
+            }
+        }
+
+        function validateAndGoStep3() {
+            const fullName = document.getElementById('inputFullName').value.trim();
+            const phone = document.getElementById('inputPhone').value.trim();
+            const identity = document.getElementById('inputIdentity').value.trim();
+            const email = document.getElementById('inputEmail').value.trim();
+            const alertBox = document.getElementById('step2ValidationAlert');
+            const alertText = document.getElementById('step2ValidationText');
+
+            if (!fullName || !phone || !identity || !email) {
+                alertBox.classList.remove('hidden');
+                alertText.textContent = 'Vui lòng điền đầy đủ Họ tên, Số điện thoại, CCCD/MST và Email để lập thỏa thuận đặt cọc.';
+                return;
+            }
+            alertBox.classList.add('hidden');
+            switchStep(3);
+        }
+
+        function selectPaymentMethod(method) {
+            appState.paymentMethod = method;
+            ['qr', 'napas', 'card'].forEach(m => {
+                const tab = document.getElementById(`payTab-${m}`);
+                const panel = document.getElementById(`payPanel-${m}`);
+                if (m === method) {
+                    tab.className = 'p-2.5 rounded-xl border-2 border-vf-blue bg-vf-lightBlue/40 text-vf-blue font-extrabold text-xs flex flex-col items-center gap-1 transition';
+                    panel.classList.remove('hidden');
+                } else {
+                    tab.className = 'p-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold text-xs flex flex-col items-center gap-1 hover:border-slate-300 transition';
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        // ==================== CLIPBOARD HELPER ====================
+        function copyTextToClipboard(text, successMsg) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(successMsg);
+        }
+
+        function copyOrderCode() {
+            copyTextToClipboard(appState.orderCode, `Đã sao chép nội dung CK: ${appState.orderCode}`);
+        }
+
+        // ==================== DEPOSIT SUBMISSION & RECEIPT ====================
+        function submitDepositOrder() {
+            const termsChecked = document.getElementById('checkboxTerms').checked;
+            const alert3 = document.getElementById('step3ValidationAlert');
+            if (!termsChecked) {
+                alert3.classList.remove('hidden');
+                return;
+            }
+            alert3.classList.add('hidden');
+
+            const fullName = document.getElementById('inputFullName').value.trim() || 'Khách hàng VinFast VIP';
+            const phone = document.getElementById('inputPhone').value.trim() || '0905888999';
+            const identity = document.getElementById('inputIdentity').value.trim() || '001095008899';
+            const showroom = document.getElementById('selectShowroom').value;
+            const now = new Date();
+            const timestamp = now.toLocaleDateString('vi-VN') + ' - ' + now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+
+            const accList = ACCESSORIES_CATALOG.filter(a => appState.selectedAccessories.has(a.id)).map(a => a.name.split(' (')[0]);
+
+            // Populate Receipt Modal
+            document.getElementById('receiptOrderCode').textContent = appState.orderCode;
+            document.getElementById('receiptTimestamp').textContent = timestamp;
+            document.getElementById('receiptCustomerName').textContent = fullName;
+            document.getElementById('receiptCustomerPhone').textContent = `${phone} • ${identity}`;
+            document.getElementById('receiptShowroom').textContent = showroom;
+            document.getElementById('receiptCarSpec').textContent =
+                appState.batteryPlan === 'lease'
+                    ? `VinFast VF 3 - Thuê pin (${appState.leaseMonthlyLabel})`
+                    : 'VinFast VF 3 - Mua kèm pin';
+            document.getElementById('receiptExterior').textContent = appState.selectedColor.name;
+            document.getElementById('receiptAccessories').textContent = accList.length > 0 ? accList.join(', ') : 'Không chọn thêm';
+            document.getElementById('receiptTotalCarPrice').textContent = getTotalListedCarPrice().toLocaleString('vi-VN') + ' VNĐ';
+
+            // Save order into lookup database
+            appState.savedOrders.unshift({
+                code: appState.orderCode,
+                name: fullName,
+                phone: phone,
+                color: appState.selectedColor.name,
+                plan: appState.batteryPlan === 'lease' ? 'Thuê pin (240.000.000 ₫)' : 'Mua kèm pin (322.000.000 ₫)',
+                showroom: showroom,
+                status: 'Đã ghi nhận đặt cọc 15.000.000 ₫ - Sẵn sàng ký HĐMB tại Showroom'
+            });
+
+            document.getElementById('receiptModal').classList.remove('hidden');
+            showToast('Đặt cọc thành công! Mã đơn: ' + appState.orderCode);
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').classList.add('hidden');
+        }
+
+        // ==================== ORDER LOOKUP MODAL ====================
+        function openOrderLookupModal() {
+            renderDefaultLookupDemo();
+            document.getElementById('lookupModal').classList.remove('hidden');
+        }
+
+        function closeOrderLookupModal() {
+            document.getElementById('lookupModal').classList.add('hidden');
+        }
+
+        function renderDefaultLookupDemo() {
+            const latest = appState.savedOrders[0];
+            const box = document.getElementById('lookupResultBox');
+            box.innerHTML = `
+                <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <span class="font-extrabold text-vf-blue font-mono">${latest.code}</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 font-bold text-[11px]">Hợp lệ</span>
+                </div>
+                <div><span class="text-slate-500">Chủ xe:</span> <strong class="text-vf-navy">${latest.name} (${latest.phone})</strong></div>
+                <div><span class="text-slate-500">Cấu hình:</span> <strong class="text-vf-navy">VF 3 • ${latest.color} • ${latest.plan}</strong></div>
+                <div><span class="text-slate-500">Showroom:</span> <strong class="text-vf-navy">${latest.showroom}</strong></div>
+                <div class="text-emerald-700 font-bold pt-1"><i class="fa-solid fa-circle-check mr-1"></i>${latest.status}</div>
+            `;
+        }
+
+        function performOrderLookup() {
+            const q = document.getElementById('lookupQueryInput').value.trim().toUpperCase();
+            const box = document.getElementById('lookupResultBox');
+            if (!q) {
+                renderDefaultLookupDemo();
+                return;
+            }
+            const found = appState.savedOrders.find(o => o.code.toUpperCase() === q || o.phone.includes(q));
+            if (found) {
+                box.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-extrabold text-vf-blue font-mono">${found.code}</span>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 font-bold text-[11px]">Đã xác thực</span>
+                    </div>
+                    <div><span class="text-slate-500">Chủ xe:</span> <strong class="text-vf-navy">${found.name} (${found.phone})</strong></div>
+                    <div><span class="text-slate-500">Cấu hình:</span> <strong class="text-vf-navy">VF 3 • ${found.color} • ${found.plan}</strong></div>
+                    <div><span class="text-slate-500">Showroom:</span> <strong class="text-vf-navy">${found.showroom}</strong></div>
+                    <div class="text-emerald-700 font-bold pt-1"><i class="fa-solid fa-circle-check mr-1"></i>${found.status}</div>
+                `;
+            } else {
+                box.innerHTML = `
+                    <div class="text-amber-700 font-semibold">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i>Không tìm thấy mã đơn "${q}". Bạn có thể thử mã mẫu <strong>VF38899</strong> hoặc đặt cọc đơn mới.
+                    </div>
+                `;
+            }
+        }
+
+        function openTermsModal() {
+            document.getElementById('termsModal').classList.remove('hidden');
+        }
+
+        function closeTermsModal() {
+            document.getElementById('termsModal').classList.add('hidden');
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
